@@ -5,7 +5,7 @@ from flask import Flask, render_template, jsonify
 
 # from flask_sqlalchemy import SQLAlchemy
 
-
+# initialize the flask app
 app = Flask(__name__)
 # CORS(app) #wrap the app with the CORS module
 

@@ -9,6 +9,9 @@ jsonify = "*"
 flask-sqlalchemy = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
+python-dotenv = "*"
+psycopg2 = "*"
+flask-cors = "*"
 
 [dev-packages]
 
