@@ -11,7 +11,7 @@ from .models import Route
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = {
-		'List':'/task-list/',
+		'All':'/route-list/',
 		}
 	return Response(api_urls)
 

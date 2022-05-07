@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +41,6 @@ INSTALLED_APPS = [
 
 
     'routes.apps.RoutesConfig',
-    
     'rest_framework',
 ]
 
@@ -104,7 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# DecimalField returned as INT
 
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
+    # Your other settings
+
+}
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
