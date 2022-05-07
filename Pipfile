@@ -8,6 +8,9 @@ django = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
+asgiref = "==3.5.0"
+django-cors-headers = "*"
+pyjwt = "*"
 
 [dev-packages]
 
