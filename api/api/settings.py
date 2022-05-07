@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'routes.apps.RoutesConfig',
     'rest_framework',
+    'corsheaders',
     'users'
 ]
 
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -135,3 +137,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL='users.User'
+
+
+# CORS allows for users from different ports to access our API
+# Allow credentials allows the cookies to be returned to our frontend
+
+CORS_ORIGIN_ALLOW_ALL=True
+CORS_ALLOW_CREDENTIALS=True
