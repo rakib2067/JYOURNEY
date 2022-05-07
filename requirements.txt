@@ -15,6 +15,7 @@ daphne==3.0.2
 debugpy @ file:///D:/bld/debugpy_1649586532851/work
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
 Django==4.0.4
+django-cors-headers==3.11.0
 djangorestframework==3.13.1
 entrypoints @ file:///home/conda/feedstock_root/build_artifacts/entrypoints_1643888246732/work
 executing @ file:///home/conda/feedstock_root/build_artifacts/executing_1646044401614/work
@@ -38,6 +39,7 @@ pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.21
 Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1650904496387/work
+PyJWT==2.3.0
 pyOpenSSL==22.0.0
 pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1649603503565/work
 python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
