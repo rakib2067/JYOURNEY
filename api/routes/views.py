@@ -29,3 +29,10 @@ def userList(request):
 	users = User.objects.all().order_by('-id')
 	serializer = UserSerializer(users, many=True)
 	return Response(serializer.data)
+
+@api_view(['GET'])
+def userDetail(request,id):
+	user = User.objects.get(pk=id)
+	serializer = UserSerializer(user, many=False)
+	return Response(serializer.data)
+
