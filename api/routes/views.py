@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
@@ -32,7 +32,7 @@ def userList(request):
 
 @api_view(['GET'])
 def userDetail(request,id):
-	user = User.objects.get(pk=id)
+	user = get_object_or_404(User,pk=id)
 	serializer = UserSerializer(user, many=False)
 	return Response(serializer.data)
 
