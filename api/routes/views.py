@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from .serializers import RouteSerializer, UserSerializer
 
 from .models import Route
-from django.contrib.auth.models import User
+from users.models import User
 
 # Create your views here.
 
@@ -14,7 +14,9 @@ from django.contrib.auth.models import User
 def apiOverview(request):
 	api_urls = {
 		'All Routes':'/route-list/',
-		'All Users':'/user-list/',
+		'All Users':'/users/',
+		'User Details':'/users/<int:id>',
+		'Register':'/register/',
 		}
 	return Response(api_urls)
 
@@ -36,3 +38,6 @@ def userDetail(request,id):
 	serializer = UserSerializer(user, many=False)
 	return Response(serializer.data)
 
+@api_view(['POST'])
+def userCreate(request):
+	serializer = UserSerializer()

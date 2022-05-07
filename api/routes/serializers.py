@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from users.models import User
 
 from rest_framework import serializers
 from .models import Route
@@ -11,4 +11,4 @@ class RouteSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username']
+        fields = ['id', 'email','name']
