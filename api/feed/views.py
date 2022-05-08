@@ -63,7 +63,7 @@ def like_view(request,id):
         if serializer.is_valid():
             serializer.save()
             data['success']="update succesful"
-            return Response(data=data)
+            return Response(data=data,status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 	
