@@ -11,6 +11,21 @@ from .serializers import PostSerializer
 from .models import Post
 
 
+
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_view(request):
+
+
+	posts = Post.objects.all()
+	serializer = PostSerializer(posts, many=True)
+	return Response(serializer.data)
+
+
+
+
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -50,5 +65,29 @@ def like_view(request,id):
             data['success']="update succesful"
             return Response(data=data)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+	
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_view(request,id):
+    try:
+        account=request.user  
+        post=Post.objects.get(pk=id)
+    except Post.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method=='DELETE':
+        if post.poster !=account:
+            return Response({'response':"You don't have permission to delete this post!"},status=status.HTTP_403_FORBIDDEN)
+        operation = post.delete()
+        data={}
+        if operation:
+            data['success']="delete succesful"
+        else:
+            data["failure"]="delete failed"   
+        return Response(data=data)	
+        
 
 	
