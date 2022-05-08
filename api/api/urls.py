@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+from routes import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('routes.urls')),
+
+    path('', views.api_overview, name="api-overview"),
+    path('route/',include('routes.urls')),
     path('auth/',include('account.urls')),
     path('feed/',include('feed.urls')),
+    
 ]
