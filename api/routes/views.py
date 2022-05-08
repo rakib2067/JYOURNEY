@@ -26,10 +26,16 @@ def api_overview(request):
 	return Response(api_urls)
 
 @api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def route_list(request):
-	routes = Route.objects.all().order_by('-id')
+
+	account= request.user
+
+	routes = Route.objects.filter(poster=account).order_by('-id')
 	serializer = RouteSerializer(routes, many=True)
 	return Response(serializer.data)
+
 
 
 @api_view(['POST'])
