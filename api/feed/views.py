@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
 from rest_framework.response import Response
-from .serializers import PostSerializer
+from .serializers import PostSerializer,GetPostSerializer
 
 from .models import Post
 
@@ -20,7 +20,7 @@ def get_view(request):
 
 
 	posts = Post.objects.all()
-	serializer = PostSerializer(posts, many=True)
+	serializer = GetPostSerializer(posts, many=True)
 	return Response(serializer.data)
 
 
