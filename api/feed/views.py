@@ -11,6 +11,23 @@ from .serializers import PostSerializer
 from .models import Post
 
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def create_view(request):
+
+    account=request.user
+    post=Post(poster=account)
+
+    if request.method=='POST':
+        serializer=PostSerializer(post,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+    return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+    
+
 @api_view(['PUT'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
