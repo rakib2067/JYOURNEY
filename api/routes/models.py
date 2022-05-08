@@ -8,6 +8,7 @@ class Route(models.Model):
   starting_longitude = models.DecimalField(max_digits=9, decimal_places=6)
   destination_latitude = models.DecimalField(max_digits=9, decimal_places=6)
   destination_longitude = models.DecimalField(max_digits=9, decimal_places=6)
+  route_title=models.CharField(max_length=255)
   poster = models.ForeignKey(settings.AUTH_USER_MODEL,null=True,on_delete=models.CASCADE)
   completed=models.BooleanField(default=False)
       

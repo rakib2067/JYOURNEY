@@ -11,8 +11,6 @@ from .serializers import PostSerializer,GetPostSerializer
 from .models import Post
 
 
-
-
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])

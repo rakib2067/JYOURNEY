@@ -11,6 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class GetPostSerializer(serializers.ModelSerializer):
     poster_name = serializers.CharField(source='poster.username')
+    route=serializers.CharField(source='route.route_title')
     likes_count = serializers.IntegerField(
     source='likes.count', 
     read_only=True
