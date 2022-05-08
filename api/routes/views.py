@@ -51,10 +51,52 @@ def create_route(request):
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data,status=status.HTTP_201_CREATED)
-		return Response(serializer.errors,status.HTTP_400_BAD_REQUEST)
+		return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
+
+@api_view(['PUT'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def update_route(request,id):
+	try:
+		account	= request.user
+		route=Route.objects.get(pk=id)
+	except Route.DoesNotExist:
+		return Response(status=status.HTTP_404_NOT_FOUND)	
+	if request.method=='PUT':
+		if route.poster != account:
+			return Response({'response':'You do not have permission to modify this route!'},status=status.HTTP_403_FORBIDDEN)
+		serializer=RouteSerializer(route,data=request.data)
+		data={}
+		if serializer.is_valid():
+			serializer.save()
+			data['success']="update succesful"
+			return Response(data=data)
+		return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)	
 	
+
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_route(request,id):
+	try:
+		account	= request.user
+		route=Route.objects.get(pk=id)
+	except Route.DoesNotExist:
+		return Response(status=status.HTTP_404_NOT_FOUND)	
+	if request.method=='DELETE':
+		if route.poster !=account:
+			return Response({'response':"You don't have permission to delete this route!"},status=status.HTTP_403_FORBIDDEN)
+		operation= route.delete()
+		data={}
+		if operation:
+			data["success"]="delete successful"
+		else:
+			data["failure"]="delete failed"
+		return Response(data=data)	
+		
 
 
 
