@@ -1,4 +1,4 @@
-from users.models import User
+from account.models import Account
 
 from rest_framework import serializers
 from .models import Route
@@ -10,5 +10,5 @@ class RouteSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'email','name']
+        model = Account
+        fields = ['id', 'email','username']

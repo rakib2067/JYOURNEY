@@ -42,8 +42,9 @@ INSTALLED_APPS = [
 
     'routes.apps.RoutesConfig',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
-    'users'
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -111,6 +112,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
+    # 'DEFAULT_AUTHENTICATION_CLASSES':[
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ],
+    # 'DEFAULT_PERMISSION_CLASSES':[
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
     # Your other settings
 
 }
@@ -136,7 +143,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL='users.User'
+AUTH_USER_MODEL='account.Account'
 
 
 # CORS allows for users from different ports to access our API
