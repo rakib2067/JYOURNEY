@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'routes.apps.RoutesConfig',
     'rest_framework',
+    'feed',
     'rest_framework.authtoken',
     'corsheaders',
     'account',
