@@ -1,15 +1,15 @@
-import React from "react";
+import React , { useContext }from "react";
 // all routes are protected apart from homepage
 import { Navigate, Outlet } from "react-router-dom";
+import AuthContext from "./auth/auth";
+import Home from "./components/Home";
 
-const useAuth = () => {
-  const user = { loggedIn: false };
-  return user && user.loggedIn;
-};
+
 
 const ProtectedRoutes = () => {
-  const isAuth = useAuth();
-  return isAuth ? <Outlet /> : <Navigate to="/" />;
+  const { isLoggedIn } = useContext(AuthContext);
+  // navigate to homepage
+  return isLoggedIn ? <Outlet /> : <Navigate to="../../"/>;
 };
 
 export default ProtectedRoutes;

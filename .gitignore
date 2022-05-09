@@ -1,6 +1,6 @@
 /notes.md
 __pycache__/
-api/Pipfile.lock
+/Pipfile.lock
 
 /Client/node_modules
 /Client/package-lock.json
