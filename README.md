@@ -18,8 +18,6 @@
 # Installation & Usage
 
 
--------
-
 # Technologies
 
 -------
