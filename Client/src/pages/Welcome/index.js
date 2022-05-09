@@ -11,9 +11,8 @@ export function Welcome() {
     <div className="background-image">
       <Container>
         <div className="logo-cont">
+          <Image className="logo" src="https://i.ibb.co/Z1K8z2n/Aurora-1-removebg-preview-1.png"/>
 
-          <h1><span className="blue">J</span><span className="green">YOUR</span><span className="blue">NEY</span></h1>
-          <p className="green">Your health, your life, your journey</p>
         </div>
 
         <Row className="mx-0">
@@ -28,4 +27,3 @@ export function Welcome() {
     </div>
   );
 }
-
