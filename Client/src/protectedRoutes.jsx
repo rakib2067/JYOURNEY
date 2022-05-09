@@ -8,7 +8,7 @@ import Home from "./components/Home";
 
 const ProtectedRoutes = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  // navigate to homepage
+  // navigate to homepage if not logged in
   return isLoggedIn ? <Outlet /> : <Navigate to="../../"/>;
 };
 

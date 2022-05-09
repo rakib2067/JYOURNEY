@@ -47,7 +47,7 @@ export function Login({ handleLogin }) {
         placeholder="password"
         value={password}
       />
-      <input type="submit" />
+      <input type="submit" value="Login" />
     </form>
   );
 }

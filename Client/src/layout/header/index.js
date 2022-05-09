@@ -15,7 +15,7 @@ export function Header() {
         },
       })
       .then((resp) => {
-        // if logging out then remove user token and redirect to home
+        // if logging out then remove user's token and redirect to home
         localStorage.removeItem("token");
         auth.setIsLoggedIn(false);
         nav("/");

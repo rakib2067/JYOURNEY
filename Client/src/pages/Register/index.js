@@ -67,7 +67,7 @@ export function Register({ handleLogin }) {
         placeholder="Confirm Password"
         value={confirmed}
       />
-      <input type="submit" />
+      <input type="submit" value="Register" />
     </form>
   );
 }
