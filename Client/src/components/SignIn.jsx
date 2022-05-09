@@ -1,8 +1,7 @@
 import React from "react";
-import { Text } from "@chakra-ui/layout";
 
 const SignIn = () => {
-  return <Text fontSize="6xl">Sign In Page</Text>;
+  return <h1 >Sign In Page</h1>;
 };
 
 export default SignIn;

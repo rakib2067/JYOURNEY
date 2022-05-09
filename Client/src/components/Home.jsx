@@ -1,8 +1,7 @@
 import React from "react";
-import { Text } from "@chakra-ui/layout";
 
 const Home = () => {
-  return <Text fontSize="6xl"> (Protected) Home Page</Text>;
+  return <h1 > (Protected) Home Page</h1>;
 };
 
 export default Home;
