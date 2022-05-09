@@ -88,4 +88,11 @@ def delete_view(request,id):
         return Response(data=data)	
         
 
+
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 	
+def get_comments(request,id):
+    post=Post.objects.get(pk=id)
