@@ -27,6 +27,9 @@ const App = () => {
     >
       <Routes>
         {!isLoggedIn && (
+          // if not logged in, then user can have access to login and register pages only
+
+          // Routes Structure isLoggedIn ? AppNavigator (protected routes):AuthNavigator (authentication)
           <>
             <Route path="/" element={<Welcome />} />
             <Route
@@ -39,6 +42,7 @@ const App = () => {
             />
           </>
         )}
+        {/* if user is logged in then they can have access to the protected routes*/}
         {isLoggedIn && (
           <>
             <Route element={<ProtectedRoutes />}>
