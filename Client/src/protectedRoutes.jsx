@@ -1,3 +1,4 @@
+import React from "react";
 // all routes are protected apart from homepage
 import { Navigate, Outlet } from "react-router-dom";
 

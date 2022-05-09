@@ -1,10 +1,11 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Account from "./components/Account";
 import Home from "./components/Home";
 import SignIn from "./components/SignIn";
 import ProtectedRoutes from "./ProtectedRoutes";
 
-const Views = () => {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<SignIn />} />
@@ -16,4 +17,4 @@ const Views = () => {
   );
 };
 
-export default Views;
+export default App;
