@@ -1,28 +1,46 @@
 from rest_framework import serializers
 
-from .models import Post,Comment
+from .models import Post, Comment
+
 
 class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model=Post
-        fields=['title','route','description'] 
+        model = Post
+        fields = ['title', 'route', 'description']
+
 
 class CommentSerializer(serializers.ModelSerializer):
+    poster_name = serializers.CharField(source='name.username')
+    likes_count = serializers.IntegerField(
+        source='likes.count',
+        read_only=True
+    )
 
     class Meta:
-        model=Comment
-        fields=['title','body'] 
+        model = Comment
+        fields = ['id', 'title', 'body', 'date_added',
+                  'post', 'poster_name', 'likes_count']
+
+
+class CreateCommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Comment
+        fields = ['title', 'body',  'post']
+        # fields = '__all__'
 
 
 class GetPostSerializer(serializers.ModelSerializer):
     poster_name = serializers.CharField(source='poster.username')
-    route=serializers.CharField(source='route.route_title')
+    route = serializers.CharField(source='route.route_title')
     likes_count = serializers.IntegerField(
-    source='likes.count', 
-    read_only=True
-)
-    class Meta:
-        model=Post
+        source='likes.count',
+        read_only=True
+    )
 
-        fields=['title','route','description','post_date','likes_count','poster_name']
+    class Meta:
+        model = Post
+
+        fields = ['title', 'route', 'description',
+                  'post_date', 'likes_count', 'poster_name']
