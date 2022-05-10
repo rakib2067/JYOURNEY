@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Account from "./components/Account";
-import Home from "./components/Home";
-import { Welcome, Login, Register, DoesNotExist, Unauthorized } from "./pages";
+
+import "./styles/globals.css";
+import {
+  Welcome,
+  Login,
+  Register,
+  DoesNotExist,
+  Unauthorized,
+  Home,
+} from "./pages";
 import ProtectedRoutes from "./protectedRoutes";
 
 import AuthContext from "./auth/auth";

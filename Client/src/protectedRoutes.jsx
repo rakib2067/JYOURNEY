@@ -2,7 +2,8 @@ import React , { useContext }from "react";
 // all routes are protected apart from homepage
 import { Navigate, Outlet } from "react-router-dom";
 import AuthContext from "./auth/auth";
-import Home from "./components/Home";
+import { Home } from "./pages";
+
 
 
 
