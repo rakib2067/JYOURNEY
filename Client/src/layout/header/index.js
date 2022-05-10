@@ -5,6 +5,7 @@ import AuthContext from "../../auth/auth";
 
 import './index.css'
 import Image from 'react-bootstrap/Image'
+import Button from 'react-bootstrap/Button';
 
 
 export function Header() {
@@ -40,7 +41,10 @@ export function Header() {
           Account
         </NavLink>
 
-        <button onClick={handleLogOut}>Log Out</button>
+        {/* <button onClick={handleLogOut}>Log Out</button> */}
+
+        <Button onClick={handleLogOut} variant="info">Log Out</Button>{' '}
+
       </div>
     </header>
   );
