@@ -1,7 +1,7 @@
 import React from "react";
 
-const Account = () => {
+export function Account  ()  {
   return <h1 fontSize="6xl"> (Protected) Account page</h1>;
 };
 
-export default Account;
+

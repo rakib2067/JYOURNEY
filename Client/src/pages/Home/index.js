@@ -22,7 +22,7 @@ export const Home = () => {
       <Map />
       <div className="d-grid gap-2">
 
-      <Button variant="secondary" size="lg" onClick={() => goTo('/UserDetails')} style={{cursor: 'pointer'}}>
+      <Button variant="secondary" size="lg" onClick={() => goTo('/Account')} style={{cursor: 'pointer'}}>
         Save Route
       </Button>
 
