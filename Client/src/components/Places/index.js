@@ -12,7 +12,7 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
-export function Places({ setLocation }) {
+export function Places({ setLocation, placeholder }) {
   const {
     ready,
     value,
@@ -27,7 +27,7 @@ export function Places({ setLocation }) {
 
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
-    setLocation({ lat, lng });
+    setLocation({ coords: { lat, lng }, title: val });
   };
 
   return (
@@ -37,7 +37,7 @@ export function Places({ setLocation }) {
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}
         className="combobox-input"
-        placeholder="From"
+        placeholder={placeholder}
       />
       <ComboboxPopover>
         <ComboboxList>

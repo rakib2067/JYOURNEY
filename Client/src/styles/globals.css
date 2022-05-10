@@ -7,29 +7,36 @@ a {
     box-sizing: border-box;
   }
   
-  .container {
-    display: flex;
-    height: 100vh;
+  .mapContainer {
+    width: 100%;
+    height: 40vh;
+    padding: .5rem;
+    
   }
+
+
   
   .controls {
-    width: 20%;
+    margin-top: 2rem;
+    width: 100%;
     padding: 1rem;
-    background: #14161a;
+    background: #ccc;
+    border-radius: 4px;
     color: #fff;
   }
   
   .controls input {
     border: none;
+    margin: 0.4rem 0;
   }
   
   .map-container {
     width: 100%;
-    height: 100vh;
+    height: 40vh;
   }
   
   .map {
-    width: 80%;
+    width: 100%;
     height: 100vh;
   }
   
