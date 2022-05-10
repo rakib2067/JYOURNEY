@@ -2,6 +2,9 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import './index.css'
+import Container from "react-bootstrap/Container";
+
 export function Register({ handleLogin }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -42,32 +45,35 @@ export function Register({ handleLogin }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} action="">
-      <input
-        type="text"
-        onChange={onUsernameChange}
-        placeholder="Username"
-        value={username}
-      />
-      <input
-        type="email"
-        onChange={onEmailChange}
-        placeholder="Email"
-        value={email}
-      />
-      <input
-        type="password"
-        onChange={onPasswordChange}
-        placeholder="Password"
-        value={password}
-      />
-      <input
-        type="password"
-        onChange={onConfirmedChange}
-        placeholder="Confirm Password"
-        value={confirmed}
-      />
-      <input type="submit" value="Register" />
-    </form>
-  );
-}
+    <div>
+         <form onSubmit={handleSubmit} action="" className="Regform">
+           <input
+             type="text"
+             onChange={onUsernameChange}
+             placeholder="Username"
+             value={username}
+             className="input" />
+           <input
+             type="email"
+             onChange={onEmailChange}
+             placeholder="Email"
+             value={email}
+             className="input" />
+           <input
+             type="password"
+             onChange={onPasswordChange}
+             placeholder="Password"
+             value={password}
+             className="input" />
+           <input
+             type="password"
+             onChange={onConfirmedChange}
+             placeholder="Confirm Password"
+             value={confirmed}
+             className="input" />
+           <input type="submit" value="Register" className="sbtinput" />
+         </form>
+         </div>
+ 
+   );
+ }

@@ -3,6 +3,9 @@ import axios from "axios";
 import AuthContext from "../../auth/auth";
 import { useNavigate } from "react-router-dom";
 
+import './index.css'
+import Container from "react-bootstrap/Container";
+
 export function Login({ handleLogin }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -33,21 +36,24 @@ export function Login({ handleLogin }) {
         console.log(error);
       });
   }
-  return (
-    <form onSubmit={handleSubmit} action="">
-      <input
-        type="email"
-        onChange={onEmailChange}
-        placeholder="email"
-        value={email}
-      />
-      <input
-        type="password"
-        onChange={onPasswordChange}
-        placeholder="password"
-        value={password}
-      />
-      <input type="submit" value="Login" />
-    </form>
+  
+    return (
+      <form onSubmit={handleSubmit} action="" className="Logform">
+        <input
+          type="email"
+          onChange={onEmailChange}
+          placeholder="email"
+          value={email}
+          className="input"
+        />
+        <input
+          type="password"
+          onChange={onPasswordChange}
+          placeholder="password"
+          value={password}
+          className="input"
+        />
+        <input type="submit" value="Login" className="Loginput"/>
+      </form>
   );
 }

@@ -3,6 +3,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../auth/auth";
 
+import './index.css'
+import Image from 'react-bootstrap/Image'
+
 export function Header() {
   const nav = useNavigate();
 
@@ -26,19 +29,18 @@ export function Header() {
   }
   return (
     <header className="header">
-      <h1 className="title" onClick={() => nav("/")}>
-        Jyourney
-      </h1>
-      <ul className="links">
-        <NavLink aria-label="link" to="/">
+       <Image className="logo" onClick={() => nav("/")} src="https://i.ibb.co/Z1K8z2n/Aurora-1-removebg-preview-1.png"/>
+      
+      <div className="links">
+        <NavLink aria-label="link" to="/" className='navlink'>
           Home
         </NavLink>
-        <NavLink aria-label="link" to="/account">
+        <NavLink aria-label="link" to="/account" className='navlink'>
           Account
         </NavLink>
 
         <button onClick={handleLogOut}>Log Out</button>
-      </ul>
+      </div>
     </header>
   );
 }
