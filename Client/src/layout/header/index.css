@@ -10,8 +10,10 @@
    margin: 0 auto;
    border-bottom: 1px solid #f2f2f2;
    justify-content: space-between;
-   background: #14161A;
+   /* background: #14161A; */
    color: white;
+
+   background: linear-gradient(to bottom, rgb(10, 8, 116) , rgb(0, 128, 111) );
  }
  
  
