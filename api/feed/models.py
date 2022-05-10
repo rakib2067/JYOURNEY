@@ -20,6 +20,8 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title} {self.poster}"
 
+# Testing change
+
 
 class Comment(models.Model):
     title = models.CharField(max_length=255)
