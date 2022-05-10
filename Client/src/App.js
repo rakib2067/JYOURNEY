@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Account from "./components/Account";
+import {Account} from "./pages/Account";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "./styles/globals.css";

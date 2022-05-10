@@ -1,0 +1,37 @@
+* {
+     margin: 0;
+     font-family: sans-serif;
+ }
+ 
+ .header {
+   padding: 20px;
+   display: flex;
+   align-items: center;
+   margin: 0 auto;
+   border-bottom: 1px solid #f2f2f2;
+   justify-content: space-between;
+   /* background: #14161A; */
+   color: white;
+
+   background: linear-gradient(to bottom, rgb(10, 8, 116) , rgb(0, 128, 111) );
+ }
+ 
+ 
+ 
+ .links {
+   padding-left: 20px;
+ }
+ .navlink {
+   margin: 0 5px;
+ }
+ 
+ .active{
+   margin-left: 26px;
+   text-decoration: none;
+   padding: 6px;
+ }
+ 
+ .logo {
+   width: 6rem;
+   height: auto;
+ }
