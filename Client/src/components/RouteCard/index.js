@@ -14,6 +14,10 @@ export function RouteCard(props) {
   const handleShow = () => setShow(true);
   const [checked, setChecked] = useState(props.route.completed);
 
+  function handleChange() {
+    setChecked(!checked);
+    props.handleCheck(props.route);
+  }
   return (
     <div id={props.route.id} className="card-container">
       <Card style={{ width: "18rem" }}>
@@ -67,7 +71,7 @@ export function RouteCard(props) {
 
             <input
               type="checkbox"
-              onChange={() => setChecked(!checked)}
+              onChange={handleChange}
               checked={checked}
               id=""
             />

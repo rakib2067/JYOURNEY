@@ -19,6 +19,13 @@ export function Account() {
     setRoutes(data);
     console.log(data);
   }
+  function onCheckbox(route) {
+    const newArray = [...routes];
+    console.log(newArray);
+    let newRoute = newArray.find((r) => r.id == route.id);
+    newRoute.completed = !newRoute.completed;
+    setRoutes((prev) => newArray);
+  }
 
   return (
     <>
@@ -28,7 +35,11 @@ export function Account() {
         {routes &&
           routes.map((route) => {
             return !route.completed ? (
-              <RouteCard key={route.id} route={route} />
+              <RouteCard
+                handleCheck={onCheckbox}
+                key={route.id}
+                route={route}
+              />
             ) : null;
           })}
       </section>
@@ -38,7 +49,11 @@ export function Account() {
         {routes &&
           routes.map((route) => {
             return route.completed ? (
-              <RouteCard key={route.id} route={route} />
+              <RouteCard
+                handleCheck={onCheckbox}
+                key={route.id}
+                route={route}
+              />
             ) : null;
           })}
       </section>
