@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { RouteCard } from "../../components";
+import { getStorage, ref } from "firebase/storage";
 
 import "./index.css";
 
 export function Account() {
   const [routes, setRoutes] = useState();
+  const [url, setUrl] = useState();
 
   useEffect(() => {
     getRoutes();
@@ -33,6 +35,16 @@ export function Account() {
 
   return (
     <>
+      <section className="profile">
+        <div className="imgContainer">
+          <input type="file" />
+          <img src={url} alt="" />
+        </div>
+        <div className="profile--details">
+          <p>Kingoks</p>
+          <p>Kingoks@gmail.com</p>
+        </div>
+      </section>
       <h1 fontSize="6xl"> My Journeys</h1>
       <section className="incomplete">
         <h2>Incompleted</h2>
