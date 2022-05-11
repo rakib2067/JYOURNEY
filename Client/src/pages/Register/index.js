@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Header } from "../../layout/header"
 
 import './index.css'
 import Container from "react-bootstrap/Container";
@@ -45,7 +46,9 @@ export function Register({ handleLogin }) {
   }
 
   return (
-    <div>
+    <>
+      <div>
+        <Header isNotAuth={true}/>
          <form onSubmit={handleSubmit} action="" className="Regform">
            <input
              type="text"
@@ -74,6 +77,6 @@ export function Register({ handleLogin }) {
            <input type="submit" value="Register" className="sbtinput" />
          </form>
          </div>
- 
+      </>
    );
  }

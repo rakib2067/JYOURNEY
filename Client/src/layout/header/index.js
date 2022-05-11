@@ -8,7 +8,7 @@ import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button';
 
 
-export function Header() {
+export function Header({ isNotAuth }) {
   const nav = useNavigate();
 
   const auth = useContext(AuthContext);
@@ -31,19 +31,23 @@ export function Header() {
   }
   return (
     <header className="header">
-       <Image className="logo" onClick={() => nav("/")} src={require('../../img/logo_black.png').default}/>
-      
+      <Image className="logo" onClick={() => nav("/")} src={require('../../img/logo_black.png').default} />
+
       <div className="links">
-        <NavLink aria-label="link" to="/" className='navlink'>
+        {isNotAuth ? <><NavLink to = "/register" >Register      </NavLink> <NavLink to="/login" >Login</NavLink> </> : <> <NavLink aria-label="link" to="/" className='navlink'>
           Home
         </NavLink>
-        <NavLink aria-label="link" to="/account" className='navlink'>
-          Account
-        </NavLink>
+          <NavLink aria-label="link" to="/account" className='navlink'>
+            Account
+          </NavLink>
+          <Button onClick={handleLogOut} variant="info">Log Out</Button>{' '}
+          </>}
+
+
 
         {/* <button onClick={handleLogOut}>Log Out</button> */}
 
-        <Button onClick={handleLogOut} variant="info">Log Out</Button>{' '}
+       
 
       </div>
     </header>

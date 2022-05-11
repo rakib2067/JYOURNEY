@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../../auth/auth";
 import { useNavigate } from "react-router-dom";
+import { Header } from "../../layout/header"
 
 import './index.css'
 import Container from "react-bootstrap/Container";
@@ -38,6 +39,8 @@ export function Login({ handleLogin }) {
   }
   
     return (
+      <>
+      <Header isNotAuth={true}/>
       <form onSubmit={handleSubmit} action="" className="Logform">
         <input
           type="email"
@@ -55,5 +58,6 @@ export function Login({ handleLogin }) {
         />
         <input type="submit" value="Login" className="Loginput"/>
       </form>
+      </>
   );
 }

@@ -8,7 +8,6 @@
    display: flex;
    align-items: center;
    margin: 0 auto;
-   border-bottom: 1px solid #f2f2f2;
    justify-content: space-between;
    /* background: #14161A; */
    color: white;
@@ -17,16 +16,17 @@
  }
  
  .links {
-   padding-left: 20px;
+   display: flex;
+   justify-content: right; 
+   align-items: center;
  }
  .navlink {
    margin: 0 5px;
  }
  
  .active{
-   margin-left: 26px;
    text-decoration: none;
-   padding: 6px;
+   padding: 10px;
  }
  
  .logo {
