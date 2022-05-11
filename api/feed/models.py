@@ -20,14 +20,18 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    title=models.CharField(max_length=255)
-    post=models.ForeignKey(Post,on_delete=models.CASCADE)
-    name=models.CharField(max_length=255)
-    body=models.TextField()
-    date_added=models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=255)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='comment_likes', blank=True)
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return f"{self.title} {self.name}"
-
-
 
