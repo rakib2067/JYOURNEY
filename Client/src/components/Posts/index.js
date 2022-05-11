@@ -75,7 +75,7 @@ export function Posts() {
                         className="mb-3"
                         controlId="exampleForm.ControlTextarea1"
                       >
-                        <Form.Label>Example textarea</Form.Label>
+                        <Form.Label>Comments</Form.Label>
                         <Form.Control as="textarea" rows={3} />
                       </Form.Group>
                     </Form>
