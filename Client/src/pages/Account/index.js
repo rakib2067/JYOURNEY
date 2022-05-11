@@ -27,6 +27,10 @@ export function Account() {
     setRoutes((prev) => newArray);
   }
 
+  function handleDelete(route) {
+    setRoutes((prev) => prev.filter((r) => r.id !== route.id));
+  }
+
   return (
     <>
       <h1 fontSize="6xl"> My Journeys</h1>
@@ -50,6 +54,7 @@ export function Account() {
           routes.map((route) => {
             return route.completed ? (
               <RouteCard
+                handleDelete={handleDelete}
                 handleCheck={onCheckbox}
                 key={route.id}
                 route={route}

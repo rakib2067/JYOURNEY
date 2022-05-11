@@ -14,10 +14,41 @@ export function RouteCard(props) {
   const handleShow = () => setShow(true);
   const [checked, setChecked] = useState(props.route.completed);
 
-  function handleChange() {
-    setChecked(!checked);
-    props.handleCheck(props.route);
+  async function handleChange() {
+    let response = await fetch(
+      `http://127.0.0.1:8000/route/update/${props.route.id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    if (response.status == "204") {
+      setChecked(!checked);
+      props.handleCheck(props.route);
+    } else {
+      alert("Error making the request");
+    }
   }
+
+  async function handleDelete() {
+    let response = await fetch(
+      `http://127.0.0.1:8000/route/delete/${props.route.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    if (response.status == "200") {
+      props.handleDelete(props.route);
+    } else {
+      alert("Error making the request");
+    }
+  }
+
   return (
     <div id={props.route.id} className="card-container">
       <Card style={{ width: "18rem" }}>
@@ -31,6 +62,9 @@ export function RouteCard(props) {
           <div className="btn-container">
             <Button disabled={!checked} variant="primary" onClick={handleShow}>
               Post the route
+            </Button>
+            <Button variant="danger" onClick={handleDelete}>
+              Delete
             </Button>
 
             <Modal show={show} onHide={handleClose}>
