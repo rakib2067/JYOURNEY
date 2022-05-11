@@ -54,7 +54,7 @@ export function Header({ isNotAuth }) {
             <NavLink aria-label="link" to="/feed" className="navlink">
               Feed
             </NavLink>
-            <Button onClick={handleLogOut} variant="info">
+            <Button className="logout-btn" onClick={handleLogOut} variant="info">
               Log Out
             </Button>{" "}
           </>
