@@ -1,7 +1,10 @@
 .footer {
-     background-color: #14161A;
+    background: linear-gradient(to bottom, rgb(14, 53, 136) , rgb(0, 128, 68) );
      color: whitesmoke;
-     padding: 5px;
-     justify-content: center;
-     align-items: center;
- }
+     
+     text-align: center;
+}
+
+.footer-text{
+    padding: 5px;
+}
