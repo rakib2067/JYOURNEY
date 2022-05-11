@@ -16,7 +16,7 @@ body {
     bottom: 0;
     left: 0;
     padding: 1rem;
-    background: linear-gradient(to bottom, rgb(14, 53, 136) , rgb(0, 128, 68) );
+    background: linear-gradient(to bottom, rgb(0, 128, 68), rgb(14, 53, 136) );
     color: whitesmoke;
     text-align: center;
 }

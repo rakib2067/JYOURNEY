@@ -141,7 +141,7 @@ export function Map() {
         <button className="addroute-btn" disabled={routeTitle ? false : true} onClick={addRoute}>
           Add Route
         </button>
-        {!starting && <p>Enter the address of your starting.</p>}
+        {!starting && <p>Enter the address of your journey</p>}
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>
     </>
