@@ -22,6 +22,7 @@ export function Posts() {
         posts.map((post) => (
           <section className="post">
             <h1>{post.title}</h1>
+            <p>{post.id}</p>
             <p>{post.route}</p>
             <p>{post.description}</p>
             <p>{post.post_date}</p>
