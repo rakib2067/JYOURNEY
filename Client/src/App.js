@@ -59,7 +59,7 @@ const App = () => {
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/account" element={<Account />} />
-                <Route path="/Feed" element={<Feed />} />
+                <Route path="/feed" element={<Feed />} />
                 <Route
                   path="/login"
                   element={<Unauthorized loggedIn={true} />}
