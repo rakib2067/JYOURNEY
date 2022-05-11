@@ -3,13 +3,10 @@ import {
   GoogleMap,
   Marker,
   DirectionsRenderer,
-  Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
 import { Places } from "../Places";
 import { Distance } from "../Distance";
-
-import axios from "axios";
 
 export function Map() {
   const [starting, setStarting] = useState();
@@ -54,7 +51,10 @@ export function Map() {
       destination_latitude: destination.coords.lat.toFixed(6),
       destination_longitude: destination.coords.lng.toFixed(6),
       route_title: routeTitle,
+      distance: directions.routes[0].legs[0].distance.text,
+      duration: directions.routes[0].legs[0].duration.text,
     };
+    console.log(directions);
     console.log(JSON.stringify(data));
     let response = await fetch("http://127.0.0.1:8000/route/create", {
       method: "POST",
