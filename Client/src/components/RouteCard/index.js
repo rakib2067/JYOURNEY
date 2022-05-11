@@ -12,7 +12,7 @@ export function RouteCard(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(props.route.completed);
 
   return (
     <div id={props.route.id} className="card-container">
