@@ -30,7 +30,7 @@ export function Posts() {
             <Card style={{ width: '18rem' }}>
               
               <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-              {/* src={require("../../img/logo_black.png").default} */}
+              src={require("../../img/logo_black.png").default}
               <Card.Body>
                   <Card.Title>{`Title: ${post.title}`}</Card.Title>
                   <Card.Text>
