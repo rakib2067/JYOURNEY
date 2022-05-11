@@ -67,13 +67,10 @@ def update_route(request,id):
 	if request.method=='PUT':
 		if route.poster != account:
 			return Response({'response':'You do not have permission to modify this route!'},status=status.HTTP_403_FORBIDDEN)
-		serializer=RouteSerializer(route,data=request.data)
-		data={}
-		if serializer.is_valid():
-			serializer.save()
-			data['success']="update succesful"
-			return Response(data=data)
-		return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)	
+		
+		route.completed= not route.completed
+		route.save()
+		return Response(status=status.HTTP_204_NO_CONTENT)	
 	
 
 
