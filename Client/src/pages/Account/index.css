@@ -3,7 +3,6 @@ h1 {
     text-align: center;
 }
 
-
-main{
-    height: calc(100vh - 160px);
+html {
+    position: relative;
 }

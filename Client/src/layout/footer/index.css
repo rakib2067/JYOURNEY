@@ -1,10 +1,28 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+}
+
 .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
     background: linear-gradient(to bottom, rgb(14, 53, 136) , rgb(0, 128, 68) );
-     color: whitesmoke;
-     margin-bottom: 0;
-     text-align: center;
+    color: whitesmoke;
+    text-align: center;
 }
 
 .footer-text {
-    padding: 5px;
+    margin-bottom: 0;
 }
+
+

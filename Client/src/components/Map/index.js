@@ -7,6 +7,8 @@ import {
 } from "@react-google-maps/api";
 import { Places } from "../Places";
 import { Distance } from "../Distance";
+import "./index.css"
+
 
 export function Map() {
   const [starting, setStarting] = useState();
@@ -72,7 +74,7 @@ export function Map() {
   return (
     <>
       <div className="mapContainer">
-        <div className="map">
+        <div>
           <GoogleMap
             zoom={12}
             center={center}
@@ -135,8 +137,8 @@ export function Map() {
           }}
           placeholder="To"
         />
-        <button onClick={fetchDirections}>Submit</button>
-        <button disabled={routeTitle ? false : true} onClick={addRoute}>
+        <button className="submit-btn" onClick={fetchDirections}>Submit</button>
+        <button className="addroute-btn" disabled={routeTitle ? false : true} onClick={addRoute}>
           Add Route
         </button>
         {!starting && <p>Enter the address of your starting.</p>}
