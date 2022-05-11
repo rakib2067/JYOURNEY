@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Account } from "./pages/Account";
+import {Feed} from "./pages/Feed";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./styles/globals.css";
@@ -58,6 +59,7 @@ const App = () => {
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/account" element={<Account />} />
+                <Route path="/feed" element={<Feed />} />
                 <Route
                   path="/login"
                   element={<Unauthorized loggedIn={true} />}
