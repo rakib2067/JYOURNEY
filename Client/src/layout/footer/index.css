@@ -1,7 +1,7 @@
 .footer {
     background: linear-gradient(to bottom, rgb(14, 53, 136) , rgb(0, 128, 68) );
      color: whitesmoke;
-     
+     margin-bottom: 0;
      text-align: center;
 }
 
