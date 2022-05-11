@@ -1,9 +1,8 @@
-h1{
+h1 {
     padding-top: 1.25rem !important;
     text-align: center;
 }
 
-
-main{
-    height: calc(100vh - 160px);
+html {
+    position: relative;
 }
