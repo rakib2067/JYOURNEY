@@ -21,13 +21,13 @@ export function Posts() {
       {posts &&
         posts.map((post) => (
           <section className="post">
-            <h1>{post.title}</h1>
-            <p>{post.id}</p>
-            <p>{post.route}</p>
-            <p>{post.description}</p>
-            <p>{post.post_date}</p>
-            <p>{post.likes_count}</p>
-            <p>{post.poster_name}</p>
+            <h1>{`Title: ${post.title}`}</h1>
+            <p>{`Id: ${post.id}`}</p>
+            <p>{`Route: ${post.route}`}</p>
+            <p>{`Description: ${post.description}`}</p>
+            <p>{`Post date: ${post.post_date}`}</p>
+            <p>{`Likes: ${post.likes_count}`}</p>
+            <p>{`Poster name: ${post.poster_name}`}</p>
           </section>
         ))}
     </>
