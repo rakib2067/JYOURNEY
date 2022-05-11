@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
+import { Modal } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import "./index.css";
 
 export function Posts() {
   let [posts, setPosts] = useState();
   // let [comments, setComments] = useState();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     getPosts();
@@ -39,16 +47,53 @@ export function Posts() {
               </Card.Body>
 
               <ListGroup className="list-group-flush">
+                  <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
                   <ListGroupItem>{`Route: ${post.route}`}</ListGroupItem>
                   <ListGroupItem>{`Likes: ${post.likes_count}`}</ListGroupItem>
-                  <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
                   <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
               </ListGroup>
 
-              {/* <Card.Body>
-                <Card.Link href="#">Card Link</Card.Link>
-                <Card.Link href="#">Another Link</Card.Link>
-              </Card.Body> */}
+              <Card.Body>
+                <Card.Link href="#" onClick={handleShow}>Add a Comment</Card.Link>
+
+                
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form>
+                      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control
+                          type="email"
+                          placeholder="username"
+                          autoFocus
+                        />
+                      </Form.Group>
+                      <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                      >
+                        <Form.Label>Example textarea</Form.Label>
+                        <Form.Control as="textarea" rows={3} />
+                      </Form.Group>
+                    </Form>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                      Save Changes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+
+
+
+                <Card.Link href="#">View Comments</Card.Link>
+              </Card.Body>
 
             </Card>
                  
