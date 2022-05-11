@@ -3,10 +3,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../auth/auth";
 
-import './index.css'
-import Image from 'react-bootstrap/Image'
-import Button from 'react-bootstrap/Button';
-
+import "./index.css";
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 
 export function Header({ isNotAuth }) {
   const nav = useNavigate();
@@ -31,24 +30,37 @@ export function Header({ isNotAuth }) {
   }
   return (
     <header className="header">
-      <Image className="logo" onClick={() => nav("/")} src={require('../../img/logo_black.png').default} />
+      <Image
+        className="logo"
+        onClick={() => nav("/")}
+        src={require("../../img/logo_black.png").default}
+      />
 
       <div className="links">
-        {isNotAuth ? <><NavLink to = "/register" >Register      </NavLink> <NavLink to="/login" >Login</NavLink> </> : <> <NavLink aria-label="link" to="/" className='navlink'>
-          Home
-        </NavLink>
-          <NavLink aria-label="link" to="/account" className='navlink'>
-            Account
-          </NavLink>
-          <Button onClick={handleLogOut} variant="info">Log Out</Button>{' '}
-          </>}
-
-
+        {isNotAuth ? (
+          <>
+            <NavLink to="/register">Register </NavLink>{" "}
+            <NavLink to="/login">Login</NavLink>{" "}
+          </>
+        ) : (
+          <>
+            {" "}
+            <NavLink aria-label="link" to="/" className="navlink">
+              Home
+            </NavLink>
+            <NavLink aria-label="link" to="/account" className="navlink">
+              Account
+            </NavLink>
+            <NavLink aria-label="link" to="/feed" className="navlink">
+              Feed
+            </NavLink>
+            <Button onClick={handleLogOut} variant="info">
+              Log Out
+            </Button>{" "}
+          </>
+        )}
 
         {/* <button onClick={handleLogOut}>Log Out</button> */}
-
-       
-
       </div>
     </header>
   );

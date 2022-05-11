@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Card } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import { ToggleButton } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
-import { Form } from "react-bootstrap";
 
-import "./index.css"
+import { RouteCard } from "../../components";
+
+import "./index.css";
 
 export function Account() {
-  let [routes, setRoutes] = useState();
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [routes, setRoutes] = useState();
 
   useEffect(() => {
     getRoutes();
@@ -26,83 +19,49 @@ export function Account() {
     setRoutes(data);
     console.log(data);
   }
+  function onCheckbox(route) {
+    const newArray = [...routes];
+    console.log(newArray);
+    let newRoute = newArray.find((r) => r.id == route.id);
+    newRoute.completed = !newRoute.completed;
+    setRoutes((prev) => newArray);
+  }
 
-  function Checkbox() {
-    const [checked, setChecked] = useState(false);
-
-    return (
-      <>
-        <ToggleButton
-          id="toggle-check"
-          type="checkbox"
-          variant="outline-primary"
-          checked={checked}
-          value="1"
-          onChange={(e) => setChecked(e.currentTarget.checked)}
-        >
-          Completed
-        </ToggleButton>
-      </>
-    );
+  function handleDelete(route) {
+    setRoutes((prev) => prev.filter((r) => r.id !== route.id));
   }
 
   return (
     <>
       <h1 fontSize="6xl"> My Journeys</h1>
-      {routes && routes.map((route) =>
-        <>
-          <div className="card-container">
-            <Card style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Title>{route.route_title}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{route.post_date}</Card.Subtitle>
-                <Card.Text>Distance: {route.distance}</Card.Text>
-                <Card.Text>Duration: {route.duration}</Card.Text>
-                <div className="btn-container">
-                  <Button variant="primary" onClick={handleShow}>Post the route</Button>
+      <section className="incomplete">
+        <h2>Incompleted</h2>
+        {routes &&
+          routes.map((route) => {
+            return !route.completed ? (
+              <RouteCard
+                handleCheck={onCheckbox}
+                key={route.id}
+                route={route}
+              />
+            ) : null;
+          })}
+      </section>
 
-                  <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Modal heading</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                          <Form.Label>Email address</Form.Label>
-                          <Form.Control
-                            type="email"
-                            placeholder="name@example.com"
-                            autoFocus
-                          />
-                        </Form.Group>
-                        <Form.Group
-                          className="mb-3"
-                          controlId="exampleForm.ControlTextarea1"
-                        >
-                          <Form.Label>Example textarea</Form.Label>
-                          <Form.Control as="textarea" rows={3} />
-                        </Form.Group>
-                      </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
-                        Close
-                      </Button>
-                      <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-
-                  <Checkbox />
-                </div>
-              </Card.Body>
-            </Card>
-          </div>
-        </>
-      )}
+      <section className="complete">
+        <h2>Completed</h2>
+        {routes &&
+          routes.map((route) => {
+            return route.completed ? (
+              <RouteCard
+                handleDelete={handleDelete}
+                handleCheck={onCheckbox}
+                key={route.id}
+                route={route}
+              />
+            ) : null;
+          })}
+      </section>
     </>
   );
 }
-
-
