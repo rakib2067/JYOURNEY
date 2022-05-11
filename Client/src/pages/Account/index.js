@@ -5,7 +5,7 @@ export function Account() {
   useEffect(() => {
     getRoutes();
   }, []);
-
+  // test
   async function getRoutes() {
     const resp = await fetch("http://localhost:8000/route/", {
       headers: { Authorization: `Token ${localStorage.getItem("token")}` },
