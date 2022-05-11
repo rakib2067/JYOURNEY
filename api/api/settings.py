@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(dnf1yt6vi!=y!^yw-58hpc0olz*-*wsu)xg+ehrp(z#m7p6fu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,13 +49,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -144,11 +144,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL='account.Account'
+AUTH_USER_MODEL = 'account.Account'
 
 
 # CORS allows for users from different ports to access our API
 # Allow credentials allows the cookies to be returned to our frontend
 
-CORS_ORIGIN_ALLOW_ALL=True
-CORS_ALLOW_CREDENTIALS=True
+CORS_ORIGIN_ALLOW_ALL = True
