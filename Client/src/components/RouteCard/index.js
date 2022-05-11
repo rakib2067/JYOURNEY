@@ -5,14 +5,50 @@ import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { ToggleButton } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import "./index.css";
 
 export function RouteCard(props) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+
+  const [postTitle, setPostTitle] = useState();
+  const [postDesc, setPostDesc] = useState();
+
+  const goTo = useNavigate();
+
+  function postTitleHandler(e) {
+    setPostTitle(e.target.value);
+  }
+  function postDescHandler(e) {
+    setPostDesc(e.target.value);
+  }
+
   const handleShow = () => setShow(true);
   const [checked, setChecked] = useState(props.route.completed);
+
+  const handleClose = async () => {
+    let data = {
+      title: postTitle,
+      description: postDesc,
+      route: props.route.id,
+    };
+    console.log(data);
+    let response = await fetch(`http://127.0.0.1:8000/feed/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status == "201") {
+      setShow(false);
+      goTo("/feed");
+    } else {
+      alert("Error creating post!");
+    }
+  };
 
   async function handleChange() {
     let response = await fetch(
@@ -77,10 +113,11 @@ export function RouteCard(props) {
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Post Title</Form.Label>
                     <Form.Control
-                      type="email"
-                      placeholder="name@example.com"
+                      type="text"
+                      onChange={postTitleHandler}
+                      placeholder="Enter your post title"
                       autoFocus
                     />
                   </Form.Group>
@@ -88,8 +125,12 @@ export function RouteCard(props) {
                     className="mb-3"
                     controlId="exampleForm.ControlTextarea1"
                   >
-                    <Form.Label>Example textarea</Form.Label>
-                    <Form.Control as="textarea" rows={3} />
+                    <Form.Label>Post Description</Form.Label>
+                    <Form.Control
+                      onChange={postDescHandler}
+                      as="textarea"
+                      rows={3}
+                    />
                   </Form.Group>
                 </Form>
               </Modal.Body>
@@ -98,7 +139,7 @@ export function RouteCard(props) {
                   Close
                 </Button>
                 <Button variant="primary" onClick={handleClose}>
-                  Save Changes
+                  Create Post
                 </Button>
               </Modal.Footer>
             </Modal>
