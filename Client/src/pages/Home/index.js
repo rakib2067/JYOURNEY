@@ -22,18 +22,14 @@ export const Home = () => {
       <Map />
       <div className="d-grid gap-2">
 
-      <Button variant="secondary" size="lg" onClick={() => goTo('/Account')} style={{cursor: 'pointer'}}>
-        Save Route
-      </Button>
+        <h1>Latest Posts</h1>
 
-      <h1>Latest Posts</h1>
-
-     
-      <Button variant="primary" size="lg"  onClick={() => goTo('/Feed')} style={{cursor: 'pointer'}}>
-        View Feed Page
-      </Button>
-      
-    </div>
+        <div className="btn-container">
+          <Button variant="primary" className="feed-btn" onClick={() => goTo('/Feed')} style={{ cursor: 'pointer' }}>
+            View Feed Page
+          </Button>
+        </div>
+      </div>
     </>
 
 
@@ -47,14 +43,3 @@ const containerStyle = {
   minHeight: "320px",
   height: "35vw",
 };
-// function Map() {
-//   const center = useMemo(() => ({ lat: 51.5012, lng: -0.1354 }), []);
-
-//   return (
-//     <div id="test" className="container">
-//       <GoogleMap mapContainerStyle={containerStyle} zoom={10} center={center}>
-//         <Marker position={center} />
-//       </GoogleMap>
-//     </div>
-//   );
-// }

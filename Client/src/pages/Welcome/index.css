@@ -44,3 +44,11 @@
     height: 15rem;
 }
 
+.feed-btn{
+    width: 40%;
+    max-width: 9.375rem !important;
+}
+
+.btn-container{
+    justify-content: center;
+}
