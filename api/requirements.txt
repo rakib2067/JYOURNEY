@@ -14,6 +14,7 @@ cryptography==37.0.1
 daphne==3.0.2
 debugpy @ file:///D:/bld/debugpy_1649586532851/work
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
+dj-database-url==0.5.0
 Django==4.0.4
 django-cors-headers==3.11.0
 djangorestframework==3.13.1
@@ -34,6 +35,8 @@ parso @ file:///home/conda/feedstock_root/build_artifacts/parso_1638334955874/wo
 pickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1602536217715/work
 prompt-toolkit @ file:///home/conda/feedstock_root/build_artifacts/prompt-toolkit_1649130487073/work
 psutil @ file:///D:/bld/psutil_1648873130737/work
+psycopg2==2.9.3
+psycopg2-binary==2.9.3
 pure-eval @ file:///home/conda/feedstock_root/build_artifacts/pure_eval_1642875951954/work
 pyasn1==0.4.8
 pyasn1-modules==0.2.8

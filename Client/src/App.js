@@ -18,6 +18,27 @@ import ProtectedRoutes from "./protectedRoutes";
 import AuthContext from "./auth/auth";
 import { Layout } from "./layout";
 
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDCX6xLZUWYhHkcHACzPDlrvuSwnwRBAZk",
+
+  authDomain: "jyourney.firebaseapp.com",
+
+  projectId: "jyourney",
+
+  storageBucket: "jyourney.appspot.com",
+
+  messagingSenderId: "925361958557",
+
+  appId: "1:925361958557:web:7800c0d260ec5f8ebaee74",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+
+const storage = getStorage(firebaseApp);
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

@@ -11,7 +11,6 @@ from .serializers import RouteSerializer, UserSerializer
 from .models import Route
 from account.models import Account
 # Create your views here.
-
 @api_view(['GET'])
 def api_overview(request):
 	api_urls = {
