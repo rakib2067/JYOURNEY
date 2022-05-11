@@ -21,10 +21,10 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // let loggedIn = localStorage.getItem("token");
-    // if (loggedIn) {
-    //   setIsLoggedIn(true);
-    // }
+    let loggedIn = localStorage.getItem("token");
+    if (loggedIn) {
+      setIsLoggedIn(true);
+    }
   }, []);
   function handleLogin() {
     setIsLoggedIn(true);
