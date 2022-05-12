@@ -66,7 +66,12 @@ export function Posts({}) {
                                 
                 {/* <ListGroupItem>{`Likes: ${post.likes_count}`}</ListGroupItem> */}
                 {/********* like button *********/}
-                <ListGroupItem> <Badge pill bg="primary" onClick={increaseLIkesCount}>Like </Badge> {likesCount}</ListGroupItem>
+                {/* <ListGroupItem> <Badge pill bg="primary" onClick={increaseLIkesCount}>Like </Badge> {likesCount}</ListGroupItem> */}
+
+                <ListGroupItem> <Badge pill bg="light" onClick={increaseLIkesCount}> <span className="like-btn"> &#9829;</span></Badge> {likesCount}</ListGroupItem>
+
+                
+
 
 
                 <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
