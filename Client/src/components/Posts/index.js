@@ -5,9 +5,13 @@ import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import { Modal } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import Offcanvas from 'react-bootstrap/Offcanvas'
+import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader'
+import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle'
+import OffcanvasBody from 'react-bootstrap/OffcanvasBody'
 import "./index.css";
 
-export function Posts() {
+export function Posts({}) {
   let [posts, setPosts] = useState();
   // let [comments, setComments] = useState();
 
@@ -15,6 +19,14 @@ export function Posts() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // view comment handlers
+  // https://react-bootstrap.github.io/components/offcanvas/
+  const [viewCanvas, setViewCanvas] = useState(false);
+
+  const handleCommentClose = () => setViewCanvas(false);
+  const handleViewCanvas = () => setViewCanvas(true);
+
 
   useEffect(() => {
     getPosts();
@@ -34,36 +46,34 @@ export function Posts() {
       {posts &&
         posts.map((post) => (
           <section className="card-container">
-            
-            <Card style={{ width: '18rem' }}>
-              
+            <Card style={{ width: "18rem" }}>
               <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
               src={require("../../img/logo_black.png").default}
               <Card.Body>
-                  <Card.Title>{`Title: ${post.title}`}</Card.Title>
-                  <Card.Text>
-                  {`Description: ${post.description}`}
-                  </Card.Text>
+                <Card.Title>{`Title: ${post.title}`}</Card.Title>
+                <Card.Text>{`Description: ${post.description}`}</Card.Text>
               </Card.Body>
-
               <ListGroup className="list-group-flush">
-                  <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
-                  <ListGroupItem>{`Route: ${post.route}`}</ListGroupItem>
-                  <ListGroupItem>{`Likes: ${post.likes_count}`}</ListGroupItem>
-                  <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
+                <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
+                <ListGroupItem>{`Route: ${post.route}`}</ListGroupItem>
+                <ListGroupItem>{`Likes: ${post.likes_count}`}</ListGroupItem>
+                <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
               </ListGroup>
+              <Card.Body/>
+              <Button variant="warning" onClick={handleShow}>
+        Add Comments
+      </Button>
 
-              <Card.Body>
-                <Card.Link href="#" onClick={handleShow}>Add a Comment</Card.Link>
-
-                
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Comment Entry</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
                     <Form>
-                      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                      <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlInput1"
+                      >
                         <Form.Label>Username</Form.Label>
                         <Form.Control
                           type="email"
@@ -85,20 +95,35 @@ export function Posts() {
                       Close
                     </Button>
                     <Button variant="primary" onClick={handleClose}>
-                      Save Changes
+                       Post Comment {/* this should send the comment to the db (based on the poster_name(username)?!) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
                     </Button>
                   </Modal.Footer>
                 </Modal>
 
+            
 
-
-                <Card.Link href="#">View Comments</Card.Link>
-              </Card.Body>
-
+                <Button variant="primary" onClick={handleViewCanvas}>
+        View Comments
+      </Button>
+                <Offcanvas show={viewCanvas} onHide={handleCommentClose} >
+                  <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Comments</Offcanvas.Title>
+                  </Offcanvas.Header>
+                  <Offcanvas.Body>
+                    Username: Comment {/* 
+                    
+                    this should get all the comments by user from the db based on post id ordered by id !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+                    e.g.
+                    username_id1 : comment_id1
+                    username_id2 : comment_id2
+                    username_id2 : comment_id3
+                    username_id3 : comment_id4
+                    */}
+                  </Offcanvas.Body>
+                </Offcanvas>
+              <Card.Body/>
             </Card>
-                 
           </section>
-
         ))}
     </>
   );
