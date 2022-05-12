@@ -11,6 +11,7 @@ import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle'
 import OffcanvasBody from 'react-bootstrap/OffcanvasBody'
 import {Badge} from 'react-bootstrap'
 import "./index.css";
+// import Heart from "react-animated-heart";
 
 export function Posts({}) {
   let [posts, setPosts] = useState();
@@ -21,9 +22,10 @@ export function Posts({}) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // like count
-  const [ likesCount, setlikesCount ] = useState(0);
-  const increaseLIkesCount = () => setlikesCount(prev => prev + 1);
+ // like count
+ const [ likesCount, setlikesCount ] = useState(0);
+ const increaseLIkesCount = () => setlikesCount(prev => prev + 1);
+
 
   // view comment handlers
   // https://react-bootstrap.github.io/components/offcanvas/
@@ -61,25 +63,18 @@ export function Posts({}) {
               <ListGroup className="list-group-flush">
                 <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
                 <ListGroupItem>{`Route: ${post.route}`}</ListGroupItem>
-                
-                
+                                
                 {/* <ListGroupItem>{`Likes: ${post.likes_count}`}</ListGroupItem> */}
-
-                  <ListGroupItem> <Badge pill bg="primary" onClick={increaseLIkesCount}>Like </Badge> {likesCount}</ListGroupItem>
-
-              
-
-
-
-
+                {/********* like button *********/}
+                <ListGroupItem> <Badge pill bg="primary" onClick={increaseLIkesCount}>Like </Badge> {likesCount}</ListGroupItem>
 
 
                 <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
               </ListGroup>
               <Card.Body/>
               <Button variant="warning" onClick={handleShow}>
-        Add Comments
-      </Button>
+                  Add Comments
+              </Button>
 
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton>
@@ -91,18 +86,18 @@ export function Posts({}) {
                         className="mb-3"
                         controlId="exampleForm.ControlInput1"
                       >
-                        <Form.Label>Username</Form.Label>
+                        {/* <Form.Label>Username</Form.Label>
                         <Form.Control
                           type="email"
                           placeholder="username"
                           autoFocus
-                        />
+                        /> */}
                       </Form.Group>
                       <Form.Group
                         className="mb-3"
                         controlId="exampleForm.ControlTextarea1"
                       >
-                        <Form.Label>Comments</Form.Label>
+                        <Form.Label>Write your comment below:</Form.Label>
                         <Form.Control as="textarea" rows={3} />
                       </Form.Group>
                     </Form>
@@ -120,14 +115,16 @@ export function Posts({}) {
             
 
                 <Button variant="primary" onClick={handleViewCanvas}>
-        View Comments
-      </Button>
+                   View Comments
+                </Button>
                 <Offcanvas show={viewCanvas} onHide={handleCommentClose} >
                   <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Comments</Offcanvas.Title>
+                    <Offcanvas.Title>All comments for this post:</Offcanvas.Title>
                   </Offcanvas.Header>
                   <Offcanvas.Body>
-                    Username: Comment {/* 
+                    Username: Comment 
+                    {/* {comment.comment.all} */}
+                    {/* 
                     
                     this should get all the comments by user from the db based on post id ordered by id !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
                     e.g.
