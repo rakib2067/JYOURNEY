@@ -79,26 +79,25 @@ export function Account() {
       <section className="profile">
         <div className="imgContainer">
           <img className="avatar" src={url} alt="" />
-          <input
+          {user && (
+            <>
+              <p>{user.username}</p>
+            </>
+          )}
+        </div>
+        <div>
+          <input className="pp-btn"
             type="file"
             onChange={(e) => {
               setImage(e.target.files[0]);
             }}
           />
-          <button onClick={uploadImage}>Upload Profile Picture</button>
-        </div>
-        <div className="profile--details">
-          {user && (
-            <>
-              <p>{user.username}</p>
-              <p>{user.email}</p>
-            </>
-          )}
+          <button className="avatar-btn" onClick={uploadImage}>Upload Profile Picture</button>
         </div>
       </section>
       <h1 fontSize="6xl"> My Journeys</h1>
       <section className="incomplete">
-        <h2>Incompleted</h2>
+        <h2 className="incompleted">Incompleted</h2>
         {routes &&
           routes.map((route) => {
             return !route.completed ? (
@@ -112,7 +111,7 @@ export function Account() {
       </section>
 
       <section className="complete">
-        <h2>Completed</h2>
+        <h2 className="completed">Completed</h2>
         {routes &&
           routes.map((route) => {
             return route.completed ? (
