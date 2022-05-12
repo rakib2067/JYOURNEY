@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { RouteCard } from "../../components";
-import { getStorage, ref } from "firebase/storage";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 import "./index.css";
-
+import avatar from "../../img/avatar.jpg";
 export function Account() {
   const [routes, setRoutes] = useState();
-  const [url, setUrl] = useState();
+  const [url, setUrl] = useState(avatar);
+
+  const fileRef = useRef();
+
+  const storage = getStorage();
 
   useEffect(() => {
     getRoutes();
@@ -33,12 +37,26 @@ export function Account() {
     setRoutes((prev) => prev.filter((r) => r.id !== route.id));
   }
 
+  function handleFile(e) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState == 2) {
+        const profileRef = ref(storage, `Profiles/mb.jpg`);
+        uploadBytes(profileRef, reader.result).then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+        });
+        setUrl(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+
   return (
     <>
       <section className="profile">
         <div className="imgContainer">
-          <input type="file" />
-          <img src={url} alt="" />
+          <img className="avatar" src={url} alt="" />
+          <input type="file" ref={fileRef} onChange={handleFile} />
         </div>
         <div className="profile--details">
           <p>Kingoks</p>

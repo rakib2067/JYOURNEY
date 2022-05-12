@@ -6,3 +6,24 @@ h1 {
 html {
     position: relative;
 }
+
+.profile{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.imgContainer{
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.avatar{
+    height: 103px;
+    width: 103px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    object-fit: cover;
+}
