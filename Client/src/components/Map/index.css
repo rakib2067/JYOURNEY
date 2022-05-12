@@ -10,11 +10,18 @@
 
 .submit-btn{
     background-color: rgb(13, 13, 201);
-   
+}
+
+.submit-btn:active{
+    background-color: rgb(28, 116, 218);
 }
 
 .addroute-btn{
     background-color: rgb(28, 116, 218);
+}
+
+.addroute-btn:active{
+    background-color: rgb(13, 13, 201);
 }
 
 .route--toast{
