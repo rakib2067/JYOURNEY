@@ -30,6 +30,8 @@ export function Map() {
   const [showToast, setShowToast] = useState(false);
 
   const [refresh, setRefresh] = useState(false);
+  
+  // check if user has coordinates in the local storage
   useEffect(() => {
     if (localStorage.getItem("startLat") != null) {
       let start = {

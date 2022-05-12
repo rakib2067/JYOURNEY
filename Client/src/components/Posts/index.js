@@ -100,6 +100,7 @@ export function Posts({}) {
     getPosts();
   }, []);
 
+  // Destructures the post object and stores destination points to localstorage
   function goToRoute({ startLat, startLong, destLat, destLong }) {
     localStorage.setItem("startLat", startLat);
     localStorage.setItem("startLong", startLong);
