@@ -42,12 +42,7 @@ const storage = getStorage(firebaseApp);
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    let loggedIn = localStorage.getItem("token");
-    if (loggedIn) {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  useEffect(() => {}, []);
   function handleLogin() {
     setIsLoggedIn(true);
   }
