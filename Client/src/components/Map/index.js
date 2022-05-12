@@ -1,4 +1,10 @@
-import React, { useState, useMemo, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import {
   GoogleMap,
   Marker,
@@ -16,10 +22,42 @@ import Button from "react-bootstrap/Button";
 export function Map() {
   const [starting, setStarting] = useState();
   const [destination, setDestination] = useState();
+  const [postStarting, setPostStarting] = useState();
+  const [postDestination, setPostDestination] = useState();
   const [directions, setDirections] = useState();
   const [routeTitle, setRouteTitle] = useState();
   const mapRef = useRef();
   const [showToast, setShowToast] = useState(false);
+
+  const [refresh, setRefresh] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("startLat") != null) {
+      let start = {
+        coords: {
+          lat: parseFloat(localStorage.getItem("startLat")),
+          lng: parseFloat(localStorage.getItem("startLong")),
+        },
+      };
+      let dest = {
+        coords: {
+          lat: parseFloat(localStorage.getItem("destLat")),
+          lng: parseFloat(localStorage.getItem("startLong")),
+        },
+      };
+      setPostStarting(start);
+      setPostDestination(dest);
+      localStorage.removeItem("startLat");
+      localStorage.removeItem("startLong");
+      localStorage.removeItem("destLat");
+      localStorage.removeItem("destLong");
+      // setRefresh(!refresh);
+      console.log(starting, destination);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchDirections();
+  }, [postStarting, postDestination]);
 
   const center = useMemo(() => ({ lat: 51.50249799, lng: -0.12249951 }), []);
   const options = useMemo(
@@ -28,6 +66,12 @@ export function Map() {
     }),
     []
   );
+
+  function test() {
+    setTimeout(() => {
+      alert(starting, destination);
+    }, 300);
+  }
   const onLoad = useCallback((map) => (mapRef.current = map), []);
   const houses = useMemo(() => generateHouses(center), [center]);
 
@@ -36,23 +80,37 @@ export function Map() {
   const target = useRef(null);
 
   const fetchDirections = () => {
-    if (!starting && destination) return;
-
-    const service = new google.maps.DirectionsService();
-    service.route(
-      {
-        origin: starting.coords,
-        destination: destination.coords,
-        travelMode: google.maps.TravelMode.BICYCLING,
-      },
-      (result, status) => {
-        if (status === "OK" && result) {
-          setDirections(result);
+    if (postStarting && postDestination) {
+      const service = new google.maps.DirectionsService();
+      service.route(
+        {
+          origin: postStarting.coords,
+          destination: postDestination.coords,
+          travelMode: google.maps.TravelMode.BICYCLING,
+        },
+        (result, status) => {
+          if (status === "OK" && result) {
+            setDirections(result);
+          }
         }
-      }
-    );
-    console.log(starting, destination);
-    setRouteTitle(`${starting.title} to ${destination.title}`);
+      );
+    } else if (starting && destination) {
+      const service = new google.maps.DirectionsService();
+      service.route(
+        {
+          origin: starting.coords,
+          destination: destination.coords,
+          travelMode: google.maps.TravelMode.BICYCLING,
+        },
+        (result, status) => {
+          if (status === "OK" && result) {
+            setDirections(result);
+          }
+        }
+      );
+      console.log(starting, destination);
+      setRouteTitle(`${starting.title} to ${destination.title}`);
+    }
   };
   async function addRoute() {
     let data = {
@@ -187,11 +245,15 @@ export function Map() {
           show={show}
           placement="right"
         >
-
           {(props) => (
-            <Tooltip onClick= {() => {setShow(!show);}} 
-            
-            bg="success" id="overlay-example" {...props}>
+            <Tooltip
+              onClick={() => {
+                setShow(!show);
+              }}
+              bg="success"
+              id="overlay-example"
+              {...props}
+            >
               You added a route!
             </Tooltip>
           )}

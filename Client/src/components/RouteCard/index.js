@@ -69,7 +69,9 @@ export function RouteCard(props) {
         }
       });
   };
-
+  function handleCloseButton() {
+    setShow(false);
+  }
   async function handleChange() {
     let response = await fetch(
       `http://127.0.0.1:8000/route/update/${props.route.id}`,
@@ -123,7 +125,12 @@ export function RouteCard(props) {
               Delete
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal
+              show={show}
+              onHide={() => {
+                setShow(false);
+              }}
+            >
               <Modal.Header closeButton>
                 <Modal.Title>Post your Route</Modal.Title>
               </Modal.Header>
@@ -162,7 +169,12 @@ export function RouteCard(props) {
                 </Form>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setShow(false);
+                  }}
+                >
                   Close
                 </Button>
                 <Button variant="primary" onClick={handleClose}>

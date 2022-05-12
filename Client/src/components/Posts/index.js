@@ -11,6 +11,7 @@ import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
 import OffcanvasBody from "react-bootstrap/OffcanvasBody";
 import { Badge } from "react-bootstrap";
 import "./index.css";
+import { useNavigate } from "react-router-dom";
 // import Heart from "react-animated-heart";
 
 export function Posts({}) {
@@ -91,7 +92,7 @@ export function Posts({}) {
   // view comment handlers
   // https://react-bootstrap.github.io/components/offcanvas/
   const [viewCanvas, setViewCanvas] = useState(false);
-
+  const goTo = useNavigate();
   const handleCommentClose = () => setViewCanvas(false);
   const handleViewCanvas = () => setViewCanvas(true);
 
@@ -99,6 +100,13 @@ export function Posts({}) {
     getPosts();
   }, []);
 
+  function goToRoute({ startLat, startLong, destLat, destLong }) {
+    localStorage.setItem("startLat", startLat);
+    localStorage.setItem("startLong", startLong);
+    localStorage.setItem("destLat", destLat);
+    localStorage.setItem("destLong", destLong);
+    goTo("/");
+  }
   async function getPosts() {
     const resp = await fetch("http://localhost:8000/feed/", {
       headers: { Authorization: `Token ${localStorage.getItem("token")}` },
@@ -217,6 +225,9 @@ export function Posts({}) {
               <Button variant="primary" onClick={handleViewCanvas}>
                 View Comments
               </Button>
+              <Button variant="info" onClick={() => goToRoute(post)}>
+                Go To Route
+              </Button>
               <Offcanvas show={viewCanvas} onHide={handleCommentClose}>
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title>All comments for this post:</Offcanvas.Title>
@@ -226,9 +237,15 @@ export function Posts({}) {
                     post.comments.map((comment) => {
                       return (
                         <div className="comment">
-                          <p>{comment.title}</p>
-                          <p>{comment.name}</p>
+                          <p className="commentTitle">{comment.poster_name}</p>
                           <p>{comment.body}</p>
+                          <p className="commentDate">
+                            Posted At:{" "}
+                            {comment.date_added.substring(
+                              0,
+                              comment.date_added.indexOf("T")
+                            )}
+                          </p>
                         </div>
                       );
                     })}

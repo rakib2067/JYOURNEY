@@ -55,6 +55,7 @@ export function Account() {
     getDownloadURL(ref(storage, `Profiles/${data.id}`))
       .then((url) => {
         // `url` is the download URL for 'images/stars.jpg'
+        localStorage.setItem("profilepic", url);
         setUrl(url);
       })
       .catch((error) => {
