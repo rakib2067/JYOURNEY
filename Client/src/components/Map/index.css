@@ -16,3 +16,8 @@
 .addroute-btn{
     background-color: rgb(28, 116, 218);
 }
+
+.route--toast{
+    margin: 0 auto;
+    margin-top: 1rem;
+}

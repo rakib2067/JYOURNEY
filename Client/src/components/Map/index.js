@@ -5,10 +5,12 @@ import {
   DirectionsRenderer,
   MarkerClusterer,
 } from "@react-google-maps/api";
+import Toast from "react-bootstrap/Toast";
 import { Places } from "../Places";
 import { Distance } from "../Distance";
-import "./index.css"
-
+import "./index.css";
+import Overlay from "react-bootstrap/Overlay";
+import Tooltip from "react-bootstrap/Tooltip";
 
 export function Map() {
   const [starting, setStarting] = useState();
@@ -16,6 +18,7 @@ export function Map() {
   const [directions, setDirections] = useState();
   const [routeTitle, setRouteTitle] = useState();
   const mapRef = useRef();
+  const [showToast, setShowToast] = useState(false);
 
   const center = useMemo(() => ({ lat: 51.50249799, lng: -0.12249951 }), []);
   const options = useMemo(
@@ -26,6 +29,10 @@ export function Map() {
   );
   const onLoad = useCallback((map) => (mapRef.current = map), []);
   const houses = useMemo(() => generateHouses(center), [center]);
+
+  // highlight text when user clicks 'add route'
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
 
   const fetchDirections = () => {
     if (!starting && destination) return;
@@ -66,9 +73,13 @@ export function Map() {
       },
       body: JSON.stringify(data),
     });
-
-    let json = await response.json();
-    console.log(json);
+    if (response.ok) {
+      let json = await response.json();
+      console.log(json);
+      setShowToast(true);
+    } else {
+      alert("Failed to add route");
+    }
   }
 
   return (
@@ -121,6 +132,21 @@ export function Map() {
           </GoogleMap>
         </div>
       </div>
+      <Toast
+        className="route--toast"
+        onClose={() => setShowToast(false)}
+        show={showToast}
+        delay={3000}
+        bg="success"
+        autohide
+      >
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+          <strong className="me-auto">Success</strong>
+          <small>11 mins ago</small>
+        </Toast.Header>
+        <Toast.Body className="Success">Added Route!</Toast.Body>
+      </Toast>
       <div className="controls">
         <h1>Commute?</h1>
         <Places
@@ -137,10 +163,28 @@ export function Map() {
           }}
           placeholder="To"
         />
-        <button className="submit-btn" onClick={fetchDirections}>Submit</button>
-        <button className="addroute-btn" disabled={routeTitle ? false : true} onClick={addRoute}>
+        <button className="submit-btn" onClick={fetchDirections}>
+          Submit
+        </button>
+
+        <button
+          className="addroute-btn"
+          disabled={routeTitle ? false : true}
+          onClick={() => {
+            addRoute();
+            setShow(!show);
+          }}
+        >
           Add Route
         </button>
+        <Overlay target={target.current} show={show} placement="right">
+          {(props) => (
+            <Tooltip id="overlay-example" {...props}>
+              You added a ro
+            </Tooltip>
+          )}
+        </Overlay>
+
         {!starting && <p>Enter the address of your journey</p>}
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>

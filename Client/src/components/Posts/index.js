@@ -84,6 +84,7 @@ export function Posts({}) {
                     bg="light"
                     onClick={() => {
                       increaseLIkesCount(post);
+                      cursor: pointer;
                     }}
                   >
                     {" "}
