@@ -9,6 +9,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import OffcanvasHeader from 'react-bootstrap/OffcanvasHeader'
 import OffcanvasTitle from 'react-bootstrap/OffcanvasTitle'
 import OffcanvasBody from 'react-bootstrap/OffcanvasBody'
+import {Badge} from 'react-bootstrap'
 import "./index.css";
 
 export function Posts({}) {
@@ -19,6 +20,10 @@ export function Posts({}) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // like count
+  const [ likesCount, setlikesCount ] = useState(0);
+  const increaseLIkesCount = () => setlikesCount(prev => prev + 1);
 
   // view comment handlers
   // https://react-bootstrap.github.io/components/offcanvas/
@@ -56,7 +61,19 @@ export function Posts({}) {
               <ListGroup className="list-group-flush">
                 <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
                 <ListGroupItem>{`Route: ${post.route}`}</ListGroupItem>
-                <ListGroupItem>{`Likes: ${post.likes_count}`}</ListGroupItem>
+                
+                
+                {/* <ListGroupItem>{`Likes: ${post.likes_count}`}</ListGroupItem> */}
+
+                  <ListGroupItem> <Badge pill bg="primary" onClick={increaseLIkesCount}>Like </Badge> {likesCount}</ListGroupItem>
+
+              
+
+
+
+
+
+
                 <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
               </ListGroup>
               <Card.Body/>
