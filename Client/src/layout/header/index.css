@@ -9,9 +9,7 @@
    align-items: center;
    margin: 0 auto;
    justify-content: space-between;
-   /* background: #14161A; */
    color: white;
-
    background: linear-gradient(to bottom, rgb(14, 53, 136) , rgb(0, 128, 68) );
  }
  

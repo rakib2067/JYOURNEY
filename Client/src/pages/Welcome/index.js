@@ -17,7 +17,7 @@ export function Welcome() {
     <div className="background-image">
       <Container>
         <div className="logo-cont">
-          <Image className="logo" src="https://i.ibb.co/Z1K8z2n/Aurora-1-removebg-preview-1.png"/>
+          <Image className="welcome-logo" src="https://i.ibb.co/Z1K8z2n/Aurora-1-removebg-preview-1.png"/>
 
         </div>
 

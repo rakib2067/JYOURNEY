@@ -3,14 +3,13 @@ h1 {
     text-align: center;
 }
 
-html {
-    position: relative;
-}
 
 .profile{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding-bottom: 20px;
+    
 }
 
 .imgContainer{
