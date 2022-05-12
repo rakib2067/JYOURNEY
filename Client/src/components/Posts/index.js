@@ -139,11 +139,6 @@ export function Posts({}) {
               <ListGroup className="list-group-flush">
                 <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
                 <ListGroupItem>{`Route: ${post.route}`}</ListGroupItem>
-
-                {/* <ListGroupItem>{`Likes: ${post.likes_count}`}</ListGroupItem> */}
-                {/********* like button *********/}
-                {/* <ListGroupItem> <Badge pill bg="primary" onClick={increaseLIkesCount}>Like </Badge> {likesCount}</ListGroupItem> */}
-
                 <ListGroupItem>
                   {" "}
                   <Badge
@@ -159,7 +154,6 @@ export function Posts({}) {
                   </Badge>{" "}
                   {post.likes_count}
                 </ListGroupItem>
-
                 <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
               </ListGroup>
               <Card.Body />
@@ -176,12 +170,6 @@ export function Posts({}) {
                       className="mb-3"
                       controlId="exampleForm.ControlInput1"
                     >
-                      {/* <Form.Label>Username</Form.Label>
-                        <Form.Control
-                          type="email"
-                          placeholder="username"
-                          autoFocus
-                        /> */}
                     </Form.Group>
                     <Form.Group
                       className="mb-3"
@@ -218,7 +206,6 @@ export function Posts({}) {
                     onClick={() => handleCommentsClose(post)}
                   >
                     Post Comment{" "}
-                    {/* this should send the comment to the db (based on the poster_name(username)?!) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
                   </Button>
                 </Modal.Footer>
               </Modal>
@@ -249,16 +236,6 @@ export function Posts({}) {
                         </div>
                       );
                     })}
-                  {/* {comment.comment.all} */}
-                  {/* 
-                    
-                    this should get all the comments by user from the db based on post id ordered by id !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-                    e.g.
-                    username_id1 : comment_id1
-                    username_id2 : comment_id2
-                    username_id2 : comment_id3
-                    username_id3 : comment_id4
-                    */}
                 </Offcanvas.Body>
               </Offcanvas>
               <Card.Body />
