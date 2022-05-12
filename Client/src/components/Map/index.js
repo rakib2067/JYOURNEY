@@ -186,8 +186,11 @@ export function Map() {
           show={show}
           placement="right"
         >
+
           {(props) => (
-            <Tooltip bg="success" id="overlay-example" {...props}>
+            <Tooltip onClick= {() => {setShow(!show);}} 
+            
+            bg="success" id="overlay-example" {...props}>
               You added a route!
             </Tooltip>
           )}
