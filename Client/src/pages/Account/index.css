@@ -6,17 +6,16 @@ h1 {
 
 .profile{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 20px;
-    
+    width: 30%;
+    margin-top: 10px;
+    margin-left: 10px;
+    gap:5px;
 }
 
 .imgContainer{
-    margin-left: 1rem;
     display: flex;
     flex-direction: column;
-
+    text-align: center;
 }
 
 .avatar{
@@ -25,4 +24,34 @@ h1 {
     border-radius: 50%;
     border: 3px solid #ccc;
     object-fit: cover;
+}
+
+.avatar-btn{
+    width: 180px;
+    border: 0;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(127 127 251);
+    color: white;
+}
+
+.pp-btn{
+    margin-bottom: 5px;
+}
+
+.incompleted{
+    color: #fff;
+    padding: 5px;
+    background-color: #dc3545;
+    border-style: double;    
+    border-radius: 10px;
+}
+
+.completed{
+    color: #fff;
+    padding: 5px;
+    background-color: rgb(73, 133, 73);
+    border-style: double;    
+    border-radius: 10px;
+
 }
