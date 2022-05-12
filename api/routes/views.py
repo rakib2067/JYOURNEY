@@ -96,17 +96,24 @@ def delete_route(request,id):
 
 
 
+# SERVER-Django changes
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def user_list(request):
-	users = Account.objects.all().order_by('-id')
-	serializer = UserSerializer(users, many=True)
-	return Response(serializer.data)
-
-@api_view(['GET'])
-def user_detail(request,id):
-	user = get_object_or_404(Account,pk=id)
+def user_detail(request):
+	account=request.user
+	user = get_object_or_404(Account,pk=account.id)
 	serializer = UserSerializer(user, many=False)
 	return Response(serializer.data)
+
+@api_view(['PUT'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def user_upload(request):
+	account=request.user
+	user = get_object_or_404(Account,pk=account.id)
+	print(request.data)
+	# serializer = UserSerializer(user, many=False)
+	# return Response(serializer.data)
 
