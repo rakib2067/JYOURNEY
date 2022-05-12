@@ -5,7 +5,7 @@ import "./index.css"
 export function Feed() {
   return (
     <>
-      <h2>Feed</h2>
+      <h2 className="feed-title">Feed</h2>
       <Posts />
     </>
   );
