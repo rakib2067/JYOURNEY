@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { RouteCard } from "../../components";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import "./index.css";
 import avatar from "../../img/avatar.jpg";
@@ -13,13 +13,12 @@ export function Account() {
   const [image, setImage] = useState();
   const storage = getStorage();
 
-  useEffect(() => {}, []);
   function uploadImage(e) {
     if (image == null) {
       return alert("Error uploading");
     }
     const reader = new FileReader();
-    const profileRef = ref(storage, `Profiles/${image.name}`);
+    const profileRef = ref(storage, `Profiles/${user.id}`);
     uploadBytes(profileRef, image).then(() => {
       alert("image uploaded");
       reader.onload = () => {
@@ -49,6 +48,14 @@ export function Account() {
       headers: { Authorization: `Token ${localStorage.getItem("token")}` },
     });
     const data = await resp.json();
+    getDownloadURL(ref(storage, `Profiles/${data.id}`))
+      .then((url) => {
+        // `url` is the download URL for 'images/stars.jpg'
+        setUrl(url);
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
     setUser(data);
   }
   function onCheckbox(route) {
