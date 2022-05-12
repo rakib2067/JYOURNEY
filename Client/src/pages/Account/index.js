@@ -19,15 +19,19 @@ export function Account() {
     }
     const reader = new FileReader();
     const profileRef = ref(storage, `Profiles/${user.id}`);
-    uploadBytes(profileRef, image).then(() => {
-      alert("image uploaded");
-      reader.onload = () => {
-        if (reader.readyState == 2) {
-          setUrl(reader.result);
-        }
-      };
-      reader.readAsDataURL(image);
-    });
+    uploadBytes(profileRef, image)
+      .then((snapshot) => {
+        return getDownloadURL(snapshot.ref);
+      })
+      .then((downloadUrl) => {
+        reader.onload = () => {
+          if (reader.readyState == 2) {
+            setUrl(reader.result);
+          }
+        };
+        reader.readAsDataURL(image);
+        console.log("Download URL", downloadUrl);
+      });
   }
 
   useEffect(() => {
