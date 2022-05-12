@@ -24,7 +24,19 @@ export function Posts({}) {
 
   // like count
   const [likesCount, setlikesCount] = useState(0);
-  const increaseLIkesCount = () => setlikesCount((prev) => prev + 1);
+  const increaseLIkesCount = async (post) => {
+    console.log("POST", post);
+    const resp = await fetch(`http://127.0.0.1:8000/feed/like/${post.id}`, {
+      method: "PUT",
+      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+    });
+
+    if (resp.status == "204") {
+      setlikesCount((prev) => prev + 1);
+    } else {
+      alert("error making request");
+    }
+  };
 
   // view comment handlers
   // https://react-bootstrap.github.io/components/offcanvas/
@@ -67,7 +79,13 @@ export function Posts({}) {
 
                 <ListGroupItem>
                   {" "}
-                  <Badge pill bg="light" onClick={increaseLIkesCount}>
+                  <Badge
+                    pill
+                    bg="light"
+                    onClick={() => {
+                      increaseLIkesCount(post);
+                    }}
+                  >
                     {" "}
                     <span className="like-btn"> &#9829;</span>
                   </Badge>{" "}
