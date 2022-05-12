@@ -125,7 +125,7 @@ export function RouteCard(props) {
 
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Post your Route</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Form>
