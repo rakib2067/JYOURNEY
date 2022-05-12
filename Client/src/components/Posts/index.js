@@ -140,7 +140,7 @@ export function Posts({}) {
                       controlId="exampleForm.ControlTextarea1"
                     >
                       <Form.Label>Write your comment below:</Form.Label>
-                      <Form.Control as="textarea" rows={3} />
+                      <Form.Control as="textarea" placeholder="Enter your comment..." rows={3} />
                     </Form.Group>
                   </Form>
                 </Modal.Body>
