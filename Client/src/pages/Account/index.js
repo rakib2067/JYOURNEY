@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { RouteCard } from "../../components";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 import "./index.css";
-
+import avatar from "../../img/avatar.jpg";
 export function Account() {
   const [routes, setRoutes] = useState();
+  const [url, setUrl] = useState(avatar);
+
+  const fileRef = useRef();
+
+  const storage = getStorage();
 
   useEffect(() => {
     getRoutes();
@@ -31,8 +37,32 @@ export function Account() {
     setRoutes((prev) => prev.filter((r) => r.id !== route.id));
   }
 
+  function handleFile(e) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState == 2) {
+        const profileRef = ref(storage, `Profiles/mb.jpg`);
+        uploadBytes(profileRef, reader.result).then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+        });
+        setUrl(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+
   return (
     <>
+      <section className="profile">
+        <div className="imgContainer">
+          <img className="avatar" src={url} alt="" />
+          <input type="file" ref={fileRef} onChange={handleFile} />
+        </div>
+        <div className="profile--details">
+          <p>Kingoks</p>
+          <p>Kingoks@gmail.com</p>
+        </div>
+      </section>
       <h1 fontSize="6xl"> My Journeys</h1>
       <section className="incomplete">
         <h2>Incompleted</h2>
