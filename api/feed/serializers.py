@@ -9,7 +9,6 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ['title', 'route', 'description', 'post_url']
 
-
 class GetPostSerializer(serializers.ModelSerializer):
     poster_name = serializers.CharField(source='poster.username')
     route = serializers.CharField(source='route.route_title')

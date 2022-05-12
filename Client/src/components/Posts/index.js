@@ -25,14 +25,33 @@ export function Posts({}) {
   // like count
   const [likesCount, setlikesCount] = useState(0);
   const increaseLIkesCount = async (post) => {
+    if (post.liked) {
+      return alert("Already liked");
+    }
     console.log("POST", post);
+    let data = {
+      title: post.title,
+      post_url: post.post_url,
+    };
+    console.log(data);
     const resp = await fetch(`http://127.0.0.1:8000/feed/like/${post.id}`, {
       method: "PUT",
-      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
     });
+    console.log(resp);
+    const respData = await resp.json();
 
-    if (resp.status == "204") {
-      setlikesCount((prev) => prev + 1);
+    if (resp.status == "200") {
+      const newArray = [...posts];
+      console.log(newArray);
+      let newPost = newArray.find((p) => p.id == post.id);
+      newPost.likes_count = newPost.likes_count + 1;
+      newPost.liked = true;
+      setPosts((prev) => newArray);
     } else {
       alert("error making request");
     }
@@ -90,7 +109,7 @@ export function Posts({}) {
                     {" "}
                     <span className="like-btn"> &#9829;</span>
                   </Badge>{" "}
-                  {likesCount}
+                  {post.likes_count}
                 </ListGroupItem>
 
                 <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
