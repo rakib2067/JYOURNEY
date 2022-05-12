@@ -16,18 +16,44 @@ import "./index.css";
 export function Posts({}) {
   let [posts, setPosts] = useState();
   // let [comments, setComments] = useState();
+  let [commentTitle, setCommentTitle] = useState();
+  let [commentDescription, setCommentDescription] = useState();
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  function handleTitle(e) {
+    setCommentTitle(e.target.value);
+  }
+  function handleDesc(e) {
+    setCommentDescription(e.target.value);
+  }
+  async function handleCommentsClose(post) {
+    let data = {
+      title: commentTitle,
+      body: commentDescription,
+      post: post.id,
+    };
+    const resp = await fetch(`http://localhost:8000/feed/comment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (resp.status == "201") {
+      post.comments.push({ ...data });
+      setShow(false);
+    }
+  }
   // like count
   const [likesCount, setlikesCount] = useState(0);
+
   const increaseLIkesCount = async (post) => {
-    if (post.liked) {
-      return alert("Already liked");
-    }
     console.log("POST", post);
     let data = {
       title: post.title,
@@ -49,8 +75,13 @@ export function Posts({}) {
       const newArray = [...posts];
       console.log(newArray);
       let newPost = newArray.find((p) => p.id == post.id);
-      newPost.likes_count = newPost.likes_count + 1;
-      newPost.liked = true;
+      if (post.liked) {
+        newPost.likes_count = newPost.likes_count - 1;
+        newPost.liked = false;
+      } else {
+        newPost.likes_count = newPost.likes_count + 1;
+        newPost.liked = true;
+      }
       setPosts((prev) => newArray);
     } else {
       alert("error making request");
@@ -73,8 +104,17 @@ export function Posts({}) {
       headers: { Authorization: `Token ${localStorage.getItem("token")}` },
     });
     const data = await resp.json();
+
+    data.forEach(async (post) => {
+      const commentResp = await fetch(`http://localhost:8000/feed/${post.id}`, {
+        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      });
+      const commentData = await commentResp.json();
+      post.comments = commentData;
+      console.log(commentData);
+    });
+
     setPosts(data);
-    console.log(data);
   }
 
   return (
@@ -83,7 +123,7 @@ export function Posts({}) {
         posts.map((post) => (
           <section className="card-container">
             <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={post.post_url} />
+              <Card.Img className="postImg" variant="top" src={post.post_url} />
               <Card.Body>
                 <Card.Title>{`Title: ${post.title}`}</Card.Title>
                 <Card.Text>{`Description: ${post.description}`}</Card.Text>
@@ -140,7 +180,24 @@ export function Posts({}) {
                       controlId="exampleForm.ControlTextarea1"
                     >
                       <Form.Label>Write your comment below:</Form.Label>
-                      <Form.Control as="textarea" rows={3} />
+                      <Form.Control
+                        value={commentTitle}
+                        onChange={handleTitle}
+                        as="textarea"
+                        rows={3}
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlTextarea1"
+                    >
+                      <Form.Label>Write your comment below:</Form.Label>
+                      <Form.Control
+                        value={commentDescription}
+                        onChange={handleDesc}
+                        as="textarea"
+                        rows={3}
+                      />
                     </Form.Group>
                   </Form>
                 </Modal.Body>
@@ -148,7 +205,10 @@ export function Posts({}) {
                   <Button variant="secondary" onClick={handleClose}>
                     Close
                   </Button>
-                  <Button variant="primary" onClick={handleClose}>
+                  <Button
+                    variant="primary"
+                    onClick={() => handleCommentsClose(post)}
+                  >
                     Post Comment{" "}
                     {/* this should send the comment to the db (based on the poster_name(username)?!) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
                   </Button>
@@ -162,6 +222,16 @@ export function Posts({}) {
                   <Offcanvas.Title>All comments for this post:</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
+                  {post.comments &&
+                    post.comments.map((comment) => {
+                      return (
+                        <div className="comment">
+                          <p>{comment.title}</p>
+                          <p>{comment.name}</p>
+                          <p>{comment.body}</p>
+                        </div>
+                      );
+                    })}
                   Username: Comment
                   {/* {comment.comment.all} */}
                   {/* 
