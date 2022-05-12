@@ -45,14 +45,14 @@ export function Login({ handleLogin }) {
         <input
           type="email"
           onChange={onEmailChange}
-          placeholder="email"
+          placeholder="Email..."
           value={email}
           className="input"
         />
         <input
           type="password"
           onChange={onPasswordChange}
-          placeholder="password"
+          placeholder="Password..."
           value={password}
           className="input"
         />

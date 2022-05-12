@@ -17,3 +17,7 @@
 .card {
     margin-bottom: 0.625rem;
 }
+
+input[type="checkbox"] {
+    cursor: pointer;
+}

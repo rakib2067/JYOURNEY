@@ -232,7 +232,6 @@ export function Posts({}) {
                         </div>
                       );
                     })}
-                  Username: Comment
                   {/* {comment.comment.all} */}
                   {/* 
                     

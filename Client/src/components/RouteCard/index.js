@@ -137,7 +137,7 @@ export function RouteCard(props) {
                     <Form.Control
                       type="text"
                       onChange={postTitleHandler}
-                      placeholder="Enter your post title"
+                      placeholder="Enter a title for your post..."
                       autoFocus
                     />
                   </Form.Group>
@@ -149,6 +149,7 @@ export function RouteCard(props) {
                     <Form.Control
                       onChange={postDescHandler}
                       as="textarea"
+                      placeholder="Enter a description for your post..."
                       rows={3}
                     />
                   </Form.Group>

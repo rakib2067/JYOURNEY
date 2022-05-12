@@ -155,14 +155,14 @@ export function Map() {
             setStarting(position);
             mapRef.current?.panTo(position.coords);
           }}
-          placeholder="From"
+          placeholder="From..."
         />
         <Places
           setLocation={(position) => {
             setDestination(position);
             mapRef.current?.panTo(position.coords);
           }}
-          placeholder="To"
+          placeholder="To..."
         />
         <button className="submit-btn" onClick={fetchDirections}>
           Submit
