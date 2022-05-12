@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
-from .models import Post,Comment
+from .models import Post, Comment
 
 
 class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['title', 'route', 'description']
+        fields = ['title', 'route', 'description', 'post_url']
 
 
 class GetPostSerializer(serializers.ModelSerializer):
@@ -22,7 +22,8 @@ class GetPostSerializer(serializers.ModelSerializer):
         model = Post
 
         fields = ['title', 'route', 'description',
-                  'post_date', 'likes_count', 'poster_name', 'id']
+                  'post_date', 'likes_count', 'poster_name', 'post_url', 'id']
+
 
 class CommentSerializer(serializers.ModelSerializer):
     poster_name = serializers.CharField(source='name.username')

@@ -6,6 +6,7 @@ import { Modal } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { ToggleButton } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import "./index.css";
 
@@ -27,27 +28,46 @@ export function RouteCard(props) {
   const handleShow = () => setShow(true);
   const [checked, setChecked] = useState(props.route.completed);
 
+  const [image, setImage] = useState();
+  const storage = getStorage();
+
   const handleClose = async () => {
-    let data = {
-      title: postTitle,
-      description: postDesc,
-      route: props.route.id,
-    };
-    console.log(data);
-    let response = await fetch(`http://127.0.0.1:8000/feed/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.status == "201") {
-      setShow(false);
-      goTo("/feed");
-    } else {
-      alert("Error creating post!");
+    if (image == null) {
+      return alert("Error uploading");
     }
+    let imageUrl;
+    const postsRef = ref(storage, `Posts/`);
+    uploadBytes(postsRef, image)
+      .then((snapshot) => {
+        console.log("post uploaded");
+        return getDownloadURL(snapshot.ref);
+      })
+      .then(async (downloadUrl) => {
+        console.log("Download URL", downloadUrl);
+        imageUrl = downloadUrl;
+        let data = {
+          title: postTitle,
+          description: postDesc,
+          route: props.route.id,
+          post_url: imageUrl,
+        };
+
+        console.log(data);
+        let response = await fetch(`http://127.0.0.1:8000/feed/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(data),
+        });
+        if (response.status == "201") {
+          setShow(false);
+          goTo("/feed");
+        } else {
+          alert("Error creating post!");
+        }
+      });
   };
 
   async function handleChange() {
@@ -132,6 +152,12 @@ export function RouteCard(props) {
                       rows={3}
                     />
                   </Form.Group>
+                  <input
+                    type="file"
+                    onChange={(e) => {
+                      setImage(e.target.files[0]);
+                    }}
+                  />
                 </Form>
               </Modal.Body>
               <Modal.Footer>
