@@ -11,6 +11,7 @@ import { Distance } from "../Distance";
 import "./index.css";
 import Overlay from "react-bootstrap/Overlay";
 import Tooltip from "react-bootstrap/Tooltip";
+import Button from "react-bootstrap/Button";
 
 export function Map() {
   const [starting, setStarting] = useState();
@@ -132,7 +133,7 @@ export function Map() {
           </GoogleMap>
         </div>
       </div>
-      <Toast
+      {/* <Toast
         className="route--toast"
         onClose={() => setShowToast(false)}
         show={showToast}
@@ -146,7 +147,7 @@ export function Map() {
           <small>11 mins ago</small>
         </Toast.Header>
         <Toast.Body className="Success">Added Route!</Toast.Body>
-      </Toast>
+      </Toast> */}
       <div className="controls">
         <h1>Commute?</h1>
         <Places
@@ -168,6 +169,7 @@ export function Map() {
         </button>
 
         <button
+          ref={target}
           className="addroute-btn"
           disabled={routeTitle ? false : true}
           onClick={() => {
@@ -177,10 +179,16 @@ export function Map() {
         >
           Add Route
         </button>
-        <Overlay target={target.current} show={show} placement="right">
+        <Overlay
+          bg="Success"
+          target={target.current}
+          delay={{ show: 250, hide: 400 }}
+          show={show}
+          placement="right"
+        >
           {(props) => (
-            <Tooltip id="overlay-example" {...props}>
-              You added a ro
+            <Tooltip bg="success" id="overlay-example" {...props}>
+              You added a route!
             </Tooltip>
           )}
         </Overlay>

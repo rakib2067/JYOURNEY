@@ -86,13 +86,16 @@ export function Account() {
           )}
         </div>
         <div>
-          <input className="pp-btn"
+          <input
+            className="pp-btn"
             type="file"
             onChange={(e) => {
               setImage(e.target.files[0]);
             }}
           />
-          <button className="avatar-btn" onClick={uploadImage}>Upload Profile Picture</button>
+          <button className="avatar-btn" onClick={uploadImage}>
+            Upload
+          </button>
         </div>
       </section>
       <h1 fontSize="6xl"> My Journeys</h1>
@@ -103,6 +106,7 @@ export function Account() {
             return !route.completed ? (
               <RouteCard
                 handleCheck={onCheckbox}
+                handleDelete={handleDelete}
                 key={route.id}
                 route={route}
               />

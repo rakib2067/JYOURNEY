@@ -81,10 +81,10 @@ export function Posts({}) {
                   {" "}
                   <Badge
                     pill
+                    style={{ cursor: "pointer" }}
                     bg="light"
                     onClick={() => {
                       increaseLIkesCount(post);
-                      cursor: pointer;
                     }}
                   >
                     {" "}
