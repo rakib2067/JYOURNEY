@@ -53,25 +53,25 @@ export function Register({ handleLogin }) {
            <input
              type="text"
              onChange={onUsernameChange}
-             placeholder="Username"
+             placeholder="Username..."
              value={username}
              className="input" />
            <input
              type="email"
              onChange={onEmailChange}
-             placeholder="Email"
+             placeholder="Email..."
              value={email}
              className="input" />
            <input
              type="password"
              onChange={onPasswordChange}
-             placeholder="Password"
+             placeholder="Password..."
              value={password}
              className="input" />
            <input
              type="password"
              onChange={onConfirmedChange}
-             placeholder="Confirm Password"
+             placeholder="Confirm Password..."
              value={confirmed}
              className="input" />
            <input type="submit" value="Register" className="sbtinput" />
