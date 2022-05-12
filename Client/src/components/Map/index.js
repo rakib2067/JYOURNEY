@@ -150,6 +150,7 @@ export function Map() {
       </Toast> */}
       <div className="controls">
         <h1>Commute?</h1>
+        <p>Enter the address of your journey:</p>
         <Places
           setLocation={(position) => {
             setStarting(position);
@@ -196,7 +197,7 @@ export function Map() {
           )}
         </Overlay>
 
-        {!starting && <p>Enter the address of your journey</p>}
+        {!starting}
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>
     </>
