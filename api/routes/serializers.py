@@ -11,4 +11,4 @@ class RouteSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['id', 'email','username']
+        fields = ['id', 'email','username','profile']
