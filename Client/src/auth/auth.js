@@ -1,4 +1,5 @@
-export default function useAuth() {
-  const user = { loggedIn: false };
-  return user && user.loggedIn;
-}
+import React from "react";
+
+const AuthContext = React.createContext();
+
+export default AuthContext;

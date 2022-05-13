@@ -1,0 +1,62 @@
+h1 {
+    padding-top: 1.25rem !important;
+    text-align: center;
+}
+
+
+.profile{
+    display: flex;
+    width: 30%;
+    margin-top: 10px;
+    margin-left: 10px;
+    gap:5px;
+}
+
+.imgContainer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.avatar{
+    height: 103px;
+    width: 103px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    object-fit: cover;
+}
+
+.avatar-btn{
+    width: 180px;
+    border: 0;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(127 127 251);
+    color: white;
+}
+
+.pp-btn{
+    margin-bottom: 5px;
+}
+
+.incompleted{
+    color: #fff;
+    padding: 5px;
+    background-color: #dc3545;
+    border-style: double;    
+    border-radius: 10px;
+}
+
+.completed{
+    color: #fff;
+    padding: 5px;
+    background-color: rgb(73, 133, 73);
+    border-style: double;    
+    border-radius: 20px;
+
+}
+
+.modal-dialog{
+    width: 90% !important;
+    margin: 0 auto;
+}

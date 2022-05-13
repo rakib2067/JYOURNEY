@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    font-family: 'Radio Canada', sans-serif !important;
+ }
+ 
+ .header {
+   padding: 10px;
+   display: flex;
+   align-items: center;
+   margin: 0 auto;
+   justify-content: space-between;
+   color: white;
+   background: linear-gradient(to bottom, rgb(14, 53, 136) , rgb(0, 128, 68) );
+ }
+ 
+ .links {
+   display: flex;
+   justify-content: right; 
+   align-items: center;
+ }
+ .navlink {
+   margin: 0 5px;
+ }
+ 
+ .active{
+   text-decoration: none;
+   padding: 10px;
+ }
+
+ a:hover{
+   color: #0dcaf0;
+ }
+ 
+ .logo {
+   width: 6rem;
+   height: auto;
+ }
+
+ .logout-btn{
+   padding: 0.3125rem;
+ }

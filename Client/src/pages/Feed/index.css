@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;600;700&display=swap');
+
+h2{
+     text-align: center;
+ }
+
+ .feed-title{
+     margin-top: 20px;
+     font-size: 30px;
+ }
+
+
+/* .footer{
+    position: absolute !important
+} */
