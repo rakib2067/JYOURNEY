@@ -21,6 +21,7 @@ export function Header({ isNotAuth }) {
       .then((resp) => {
         // if logging out then remove user's token and redirect to home
         localStorage.removeItem("token");
+        localStorage.removeItem("url");
         auth.setIsLoggedIn(false);
         nav("/");
       })
@@ -54,7 +55,11 @@ export function Header({ isNotAuth }) {
             <NavLink aria-label="link" to="/feed" className="navlink">
               Feed
             </NavLink>
-            <Button className="logout-btn" onClick={handleLogOut} variant="info">
+            <Button
+              className="logout-btn"
+              onClick={handleLogOut}
+              variant="info"
+            >
               Log Out
             </Button>{" "}
           </>

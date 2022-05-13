@@ -50,8 +50,6 @@ export function Map() {
       localStorage.removeItem("startLong");
       localStorage.removeItem("destLat");
       localStorage.removeItem("destLong");
-      // setRefresh(!refresh);
-      console.log(starting, destination);
     }
   }, []);
 
@@ -67,11 +65,6 @@ export function Map() {
     []
   );
 
-  function test() {
-    setTimeout(() => {
-      alert(starting, destination);
-    }, 300);
-  }
   const onLoad = useCallback((map) => (mapRef.current = map), []);
   const houses = useMemo(() => generateHouses(center), [center]);
 
@@ -79,22 +72,8 @@ export function Map() {
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
-  const fetchDirections = () => {
-    if (postStarting && postDestination) {
-      const service = new google.maps.DirectionsService();
-      service.route(
-        {
-          origin: postStarting.coords,
-          destination: postDestination.coords,
-          travelMode: google.maps.TravelMode.BICYCLING,
-        },
-        (result, status) => {
-          if (status === "OK" && result) {
-            setDirections(result);
-          }
-        }
-      );
-    } else if (starting && destination) {
+  const fetchDirections = async () => {
+    if (starting && destination) {
       const service = new google.maps.DirectionsService();
       service.route(
         {
@@ -110,11 +89,27 @@ export function Map() {
       );
       console.log(starting, destination);
       setRouteTitle(`${starting.title} to ${destination.title}`);
+    } else if (postStarting && postDestination) {
+      const service = new google.maps.DirectionsService();
+      service.route(
+        {
+          origin: postStarting.coords,
+          destination: postDestination.coords,
+          travelMode: google.maps.TravelMode.BICYCLING,
+        },
+        (result, status) => {
+          if (status === "OK" && result) {
+            setDirections(result);
+          }
+        }
+      );
     }
   };
   async function addRoute() {
     let data = {
-      starting_latitude: starting.coords.lat.toFixed(6),
+      starting_latitude: starting
+        ? starting.coords.lat.toFixed(6)
+        : postStarting.coords.lat.toFixed(6),
       starting_longitude: starting.coords.lng.toFixed(6),
       destination_latitude: destination.coords.lat.toFixed(6),
       destination_longitude: destination.coords.lng.toFixed(6),
@@ -169,6 +164,29 @@ export function Map() {
               <>
                 <Marker
                   position={starting.coords}
+                  icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+                />
+
+                <MarkerClusterer>
+                  {(clusterer) =>
+                    houses.map((house) => (
+                      <Marker
+                        key={house.lat}
+                        position={house}
+                        clusterer={clusterer}
+                        onClick={() => {
+                          fetchDirections(house);
+                        }}
+                      />
+                    ))
+                  }
+                </MarkerClusterer>
+              </>
+            )}
+            {postStarting && (
+              <>
+                <Marker
+                  position={postStarting.coords}
                   icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
                 />
 

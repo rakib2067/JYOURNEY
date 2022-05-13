@@ -33,7 +33,7 @@ export function Posts({}) {
   }
   async function handleCommentsClose(post) {
     let data = {
-      title: commentTitle,
+      title: "test",
       body: commentDescription,
       post: post.id,
     };
@@ -47,13 +47,22 @@ export function Posts({}) {
     });
 
     if (resp.status == "201") {
-      post.comments.push({ ...data });
+      post.comments.push({ ...data, date_added: new Date().toISOString() });
       setShow(false);
     }
   }
-  // like count
-  const [likesCount, setlikesCount] = useState(0);
+  async function deletePost(post) {
+    const resp = await fetch(`http://localhost:8000/feed/delete/${post.id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+    });
 
+    if (resp.status == "200") {
+      setPosts((prev) => prev.filter((p) => p.id !== post.id));
+    } else {
+      alert("You can't delete this");
+    }
+  }
   const increaseLIkesCount = async (post) => {
     console.log("POST", post);
     let data = {
@@ -129,7 +138,7 @@ export function Posts({}) {
     <>
       {posts &&
         posts.map((post) => (
-          <section className="card-container">
+          <section key={post.id} className="card-container">
             <Card style={{ width: "18rem" }}>
               <Card.Img className="postImg" variant="top" src={post.post_url} />
               <Card.Body>
@@ -139,21 +148,35 @@ export function Posts({}) {
               <ListGroup className="list-group-flush">
                 <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
                 <ListGroupItem>{`Route: ${post.route}`}</ListGroupItem>
-                <ListGroupItem>
-                  {" "}
-                  <Badge
-                    pill
-                    style={{ cursor: "pointer" }}
-                    bg="light"
-                    onClick={() => {
-                      increaseLIkesCount(post);
-                    }}
-                  >
-                    {" "}
-                    <span className="like-btn"> &#9829;</span>
-                  </Badge>{" "}
-                  {post.likes_count}
-                </ListGroupItem>
+                <div className="btnCont">
+                  <div className="delCont">
+                    <div>
+                      <Badge
+                        pill
+                        style={{ cursor: "pointer" }}
+                        bg="light"
+                        onClick={() => {
+                          increaseLIkesCount(post);
+                        }}
+                      >
+                        <span className="like-btn"> &#9829;</span>
+                      </Badge>
+                      {post.likes_count}
+                    </div>
+                    <div>
+                      <Badge
+                        pill
+                        style={{ cursor: "pointer" }}
+                        bg="light"
+                        onClick={() => {
+                          deletePost(post);
+                        }}
+                      >
+                        <span className="like-btn">🗑</span>
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
                 <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
               </ListGroup>
               <Card.Body />
@@ -169,20 +192,8 @@ export function Posts({}) {
                     <Form.Group
                       className="mb-3"
                       controlId="exampleForm.ControlInput1"
-                    >
-                    </Form.Group>
-                    <Form.Group
-                      className="mb-3"
-                      controlId="exampleForm.ControlTextarea1"
-                    >
-                      <Form.Label>Write your comment below:</Form.Label>
-                      <Form.Control
-                        value={commentTitle}
-                        onChange={handleTitle}
-                        as="textarea"
-                        rows={3}
-                      />
-                    </Form.Group>
+                    ></Form.Group>
+
                     <Form.Group
                       className="mb-3"
                       controlId="exampleForm.ControlTextarea1"
@@ -223,7 +234,7 @@ export function Posts({}) {
                   {post.comments &&
                     post.comments.map((comment) => {
                       return (
-                        <div className="comment">
+                        <div key={comment.id} className="comment">
                           <p className="commentTitle">{comment.poster_name}</p>
                           <p>{comment.body}</p>
                           <p className="commentDate">

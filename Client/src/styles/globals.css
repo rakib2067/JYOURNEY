@@ -14,7 +14,16 @@ a {
     
   }
 
+#root{
+  position: relative;
+    height: 100vh;
+}
 
+.footer{
+  position: sticky;
+  bottom:0;
+  width: 100%;
+}
   
   .controls {
     margin-top: 1rem;

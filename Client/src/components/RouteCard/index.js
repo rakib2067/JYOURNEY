@@ -36,7 +36,10 @@ export function RouteCard(props) {
       return alert("Error uploading");
     }
     let imageUrl;
-    const postsRef = ref(storage, `Posts/`);
+    const postsRef = ref(
+      storage,
+      `Posts/${(Math.random() + 1).toString(36).substring(7)}`
+    );
     uploadBytes(postsRef, image)
       .then((snapshot) => {
         console.log("post uploaded");
