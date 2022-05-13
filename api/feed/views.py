@@ -17,6 +17,7 @@ from .models import Post, Comment
 def get_view(request):
 
     posts = Post.objects.all()
+
     serializer = GetPostSerializer(posts, many=True)
     return Response(serializer.data)
 
@@ -40,10 +41,10 @@ def create_view(request):
 @api_view(['PUT'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def like_view(request,id):
+def like_view(request, id):
     try:
-        account=request.user  
-        post=Post.objects.get(pk=id)
+        account = request.user
+        post = Post.objects.get(pk=id)
         if post.likes.filter(id=account.id).exists():
             post.likes.remove(account)
         else:
@@ -51,14 +52,15 @@ def like_view(request,id):
     except Post.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method=='PUT':
-        serializer=PostSerializer(post,data=request.data)
-        data={}
+    if request.method == 'PUT':
+        serializer = PostSerializer(post, data=request.data)
+        data = {}
         if serializer.is_valid():
             serializer.save()
-            data['success']="update succesful"
+            data['success'] = "update succesful"
             return Response(serializer.data)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['DELETE'])
 @authentication_classes([TokenAuthentication])

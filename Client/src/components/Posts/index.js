@@ -48,7 +48,11 @@ export function Posts({}) {
     });
 
     if (resp.status == "201") {
-      post.comments.push({ ...data, date_added: new Date().toISOString() });
+      post.comments.push({
+        ...data,
+        id: (Math.random() + 1).toString(36).substring(7),
+        date_added: new Date().toISOString(),
+      });
       setShow(false);
     }
   }
@@ -119,41 +123,12 @@ export function Posts({}) {
     goTo("/");
   }
   async function getPosts() {
-    axios
-      .get("http://localhost:8000/feed/", {
-        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-      })
-      .then(({ data }) => {
-        console.log(data);
-        data.forEach((post) => {
-          axios
-            .get(`http://localhost:8000/feed/${post.id}`, {
-              headers: {
-                Authorization: `Token ${localStorage.getItem("token")}`,
-              },
-            })
-            .then(({ data }) => {
-              post.comments = data;
-              console.log(data);
-            });
-        });
-        return data;
-      })
-      .then((data) => {
-        setPosts(data);
-      });
-    // const data = await resp.json();
+    const resp = await fetch("http://localhost:8000/feed/", {
+      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+    });
+    const data = await resp.json();
 
-    // data.forEach(async (post) => {
-    //   const commentResp = await fetch(`http://localhost:8000/feed/${post.id}`, {
-    //     headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-    //   });
-    //   const commentData = await commentResp.json();
-    //   post.comments = commentData;
-    //   console.log(commentData);
-    // });
-
-    // setPosts(data);
+    setPosts(data);
   }
 
   return (
@@ -248,27 +223,28 @@ export function Posts({}) {
               <Button variant="info" onClick={() => goToRoute(post)}>
                 Go To Route
               </Button>
+
               <Offcanvas show={viewCanvas} onHide={handleCommentClose}>
                 <Offcanvas.Header closeButton>
                   <Offcanvas.Title>All comments for this post:</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                  {post.comments &&
-                    post.comments.map((comment) => {
-                      return (
-                        <div key={comment.id} className="comment">
-                          <p className="commentTitle">{comment.poster_name}</p>
-                          <p>{comment.body}</p>
-                          <p className="commentDate">
-                            Posted At:{" "}
-                            {comment.date_added.substring(
-                              0,
-                              comment.date_added.indexOf("T")
-                            )}
-                          </p>
-                        </div>
-                      );
-                    })}
+                  {post.comments.map((comment) => {
+                    console.log(comment);
+                    return (
+                      <div key={comment.id} className="comment">
+                        <p className="commentTitle">{comment.poster_name}</p>
+                        <p>{comment.body}</p>
+                        <p className="commentDate">
+                          Posted At:{" "}
+                          {comment.date_added.substring(
+                            0,
+                            comment.date_added.indexOf("T")
+                          )}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </Offcanvas.Body>
               </Offcanvas>
               <Card.Body />
