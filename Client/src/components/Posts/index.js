@@ -12,6 +12,7 @@ import OffcanvasBody from "react-bootstrap/OffcanvasBody";
 import { Badge } from "react-bootstrap";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // import Heart from "react-animated-heart";
 
 export function Posts({}) {
@@ -118,21 +119,41 @@ export function Posts({}) {
     goTo("/");
   }
   async function getPosts() {
-    const resp = await fetch("http://localhost:8000/feed/", {
-      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-    });
-    const data = await resp.json();
-
-    data.forEach(async (post) => {
-      const commentResp = await fetch(`http://localhost:8000/feed/${post.id}`, {
+    axios
+      .get("http://localhost:8000/feed/", {
         headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      })
+      .then(({ data }) => {
+        console.log(data);
+        data.forEach((post) => {
+          axios
+            .get(`http://localhost:8000/feed/${post.id}`, {
+              headers: {
+                Authorization: `Token ${localStorage.getItem("token")}`,
+              },
+            })
+            .then(({ data }) => {
+              post.comments = data;
+              console.log(data);
+            });
+        });
+        return data;
+      })
+      .then((data) => {
+        setPosts(data);
       });
-      const commentData = await commentResp.json();
-      post.comments = commentData;
-      console.log(commentData);
-    });
+    // const data = await resp.json();
 
-    setPosts(data);
+    // data.forEach(async (post) => {
+    //   const commentResp = await fetch(`http://localhost:8000/feed/${post.id}`, {
+    //     headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+    //   });
+    //   const commentData = await commentResp.json();
+    //   post.comments = commentData;
+    //   console.log(commentData);
+    // });
+
+    // setPosts(data);
   }
 
   return (
