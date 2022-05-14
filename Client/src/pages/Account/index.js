@@ -77,7 +77,7 @@ export function Account() {
   }
 
   return (
-    <>
+    <div className="container">
       <section className="profile">
         <div className="imgContainer">
           <img className="avatar" src={url} alt="" />
@@ -87,7 +87,7 @@ export function Account() {
             </>
           )}
         </div>
-        <div>
+        <div className="profile--body">
           <input
             className="pp-btn"
             type="file"
@@ -101,35 +101,37 @@ export function Account() {
         </div>
       </section>
       <h1 fontSize="6xl"> My Journeys</h1>
-      <section className="incomplete">
-        <h2 className="incompleted">Incompleted</h2>
-        {routes &&
-          routes.map((route) => {
-            return !route.completed ? (
-              <RouteCard
-                handleCheck={onCheckbox}
-                handleDelete={handleDelete}
-                key={route.id}
-                route={route}
-              />
-            ) : null;
-          })}
-      </section>
+      <section className="routes">
+        <section className="incomplete">
+          <h2 className="incompleted">Incompleted</h2>
+          {routes &&
+            routes.map((route) => {
+              return !route.completed ? (
+                <RouteCard
+                  handleCheck={onCheckbox}
+                  handleDelete={handleDelete}
+                  key={route.id}
+                  route={route}
+                />
+              ) : null;
+            })}
+        </section>
 
-      <section className="complete">
-        <h2 className="completed">Completed</h2>
-        {routes &&
-          routes.map((route) => {
-            return route.completed ? (
-              <RouteCard
-                handleDelete={handleDelete}
-                handleCheck={onCheckbox}
-                key={route.id}
-                route={route}
-              />
-            ) : null;
-          })}
+        <section className="complete">
+          <h2 className="completed">Completed</h2>
+          {routes &&
+            routes.map((route) => {
+              return route.completed ? (
+                <RouteCard
+                  handleDelete={handleDelete}
+                  handleCheck={onCheckbox}
+                  key={route.id}
+                  route={route}
+                />
+              ) : null;
+            })}
+        </section>
       </section>
-    </>
+    </div>
   );
 }

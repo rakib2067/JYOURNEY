@@ -10,10 +10,24 @@
     background-position: 30%;
 }
 
+@media screen and (min-width:1024px) {
+    /* .background-image{
+        height: auto;
+    } */
+    #root{
+        height: auto;
+    }
+}
+.welcomeCont{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 .btn-width{
     width: 30%;
     max-width: 9.375rem !important;
-    margin-top: 480px !important;
+    /* margin-top: 480px !important; */
 }
 
 .row{

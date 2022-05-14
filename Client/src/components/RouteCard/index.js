@@ -115,7 +115,7 @@ export function RouteCard(props) {
 
   return (
     <div id={props.route.id} className="card-container">
-      <Card style={{ width: "18rem" }}>
+      <div className="cardRoute" style={{ width: "100%" }}>
         <Card.Body>
           <Card.Title>{props.route.route_title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
@@ -197,7 +197,7 @@ export function RouteCard(props) {
             />
           </div>
         </Card.Body>
-      </Card>
+      </div>
     </div>
   );
 }

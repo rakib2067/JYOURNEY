@@ -135,7 +135,7 @@ export function Map() {
   }
 
   return (
-    <>
+    <div className="submitContainer">
       <div className="mapContainer">
         <div>
           <GoogleMap
@@ -278,7 +278,7 @@ export function Map() {
         {!starting}
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>
-    </>
+    </div>
   );
 }
 

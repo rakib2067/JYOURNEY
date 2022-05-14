@@ -1,3 +1,9 @@
 .controls{
     background: linear-gradient(to bottom, rgb(14, 53, 136) , rgb(0, 128, 68) );
 }
+
+@media screen and (min-width:1024px) {
+    .btnView{
+        display: none;
+    }
+}

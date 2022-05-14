@@ -47,9 +47,9 @@ export function Register({ handleLogin }) {
 
   return (
     <>
-      <div>
-        <Header isNotAuth={true} />
-        <form onSubmit={handleSubmit} action="" className="Regform">
+      <Header isNotAuth={true} />
+      <div className="formContainer">
+        <form onSubmit={handleSubmit} action="" className="Logform">
           <input
             type="text"
             onChange={onUsernameChange}

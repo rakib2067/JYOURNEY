@@ -41,23 +41,25 @@ export function Login({ handleLogin }) {
   return (
     <>
       <Header isNotAuth={true} />
-      <form onSubmit={handleSubmit} action="" className="Logform">
-        <input
-          type="email"
-          onChange={onEmailChange}
-          placeholder="Email..."
-          value={email}
-          className="input"
-        />
-        <input
-          type="password"
-          onChange={onPasswordChange}
-          placeholder="Password..."
-          value={password}
-          className="input"
-        />
-        <input type="submit" value="Login" className="Loginput" />
-      </form>
+      <div className="formContainer">
+        <form onSubmit={handleSubmit} action="" className="Logform">
+          <input
+            type="email"
+            onChange={onEmailChange}
+            placeholder="Email..."
+            value={email}
+            className="input"
+          />
+          <input
+            type="password"
+            onChange={onPasswordChange}
+            placeholder="Password..."
+            value={password}
+            className="input"
+          />
+          <input type="submit" value="Login" className="Loginput" />
+        </form>
+      </div>
     </>
   );
 }

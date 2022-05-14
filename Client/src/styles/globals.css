@@ -7,12 +7,6 @@ a {
     box-sizing: border-box;
   }
   
-  .mapContainer {
-    width: 100%;
-    height: 40vh;
-    padding: .5rem;
-    
-  }
 
 #root{
   position: relative;
@@ -39,6 +33,13 @@ a {
     margin: 0.4rem 0;
   }
   
+  .mapContainer {
+    width: 100%;
+    height: 40vh;
+    padding: .5rem;
+    
+  }
+
   .map-container {
     width: 100%;
     height: 40vh;
@@ -57,4 +58,49 @@ a {
   .combobox-input {
     width: 100%;
     padding: 0.5rem;
+  }
+
+  @media screen and (min-width:768px) {
+    .mapContainer {
+      height: 70vh;
+      margin: 0 auto;
+      padding: .5rem;
+      
+    }
+  
+    .map-container {
+      width: 100%;
+      height: 70vh;
+    }
+    
+    .map {
+      width: 100%;
+      height: 100vh;
+    }
+    
+  }
+  @media screen and (min-width:1024px) {
+    
+    .mapContainer {
+      width: 80%;
+      height: 70vh;
+      margin: 0 auto;
+      padding: .5rem;
+      flex:2
+      
+    }
+    .controls{
+      flex: 1;
+    }
+  
+    .map-container {
+      width: 100%;
+      height: 70vh;
+    }
+    
+    .map {
+      width: 100%;
+      height: 100vh;
+    }
+    
   }
