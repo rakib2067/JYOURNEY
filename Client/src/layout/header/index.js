@@ -13,7 +13,7 @@ export function Header({ isNotAuth }) {
   const auth = useContext(AuthContext);
   function handleLogOut() {
     axios
-      .get("http://127.0.0.1:8000/auth/logout", {
+      .get("https://jyourney.herokuapp.com/auth/logout", {
         headers: {
           Authorization: `Token ${localStorage.getItem("token")}`,
         },

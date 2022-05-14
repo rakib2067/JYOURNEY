@@ -38,7 +38,7 @@ export function Posts({}) {
       body: commentDescription,
       post: post.id,
     };
-    const resp = await fetch(`http://localhost:8000/feed/comment`, {
+    const resp = await fetch(`https://jyourney.herokuapp.com/feed/comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,10 +58,13 @@ export function Posts({}) {
     }
   }
   async function deletePost(post) {
-    const resp = await fetch(`http://localhost:8000/feed/delete/${post.id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-    });
+    const resp = await fetch(
+      `https://jyourney.herokuapp.com/feed/delete/${post.id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      }
+    );
 
     if (resp.status == "200") {
       setPosts((prev) => prev.filter((p) => p.id !== post.id));
@@ -76,14 +79,17 @@ export function Posts({}) {
       post_url: post.post_url,
     };
     console.log(data);
-    const resp = await fetch(`http://127.0.0.1:8000/feed/like/${post.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    });
+    const resp = await fetch(
+      `https://jyourney.herokuapp.com/feed/like/${post.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
     console.log(resp);
     const respData = await resp.json();
 
@@ -124,7 +130,7 @@ export function Posts({}) {
     goTo("/");
   }
   async function getPosts() {
-    const resp = await fetch("http://localhost:8000/feed/", {
+    const resp = await fetch("https://jyourney.herokuapp.com/feed/", {
       headers: { Authorization: `Token ${localStorage.getItem("token")}` },
     });
     const data = await resp.json();

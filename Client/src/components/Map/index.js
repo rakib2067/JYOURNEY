@@ -119,7 +119,7 @@ export function Map() {
       distance: directions.routes[0].legs[0].distance.text,
       duration: directions.routes[0].legs[0].duration.text,
     };
-    let response = await fetch("http://127.0.0.1:8000/route/create", {
+    let response = await fetch("https://jyourney.herokuapp.com/route/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

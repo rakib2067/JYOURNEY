@@ -40,7 +40,7 @@ export function Account() {
   }, []);
   // test
   async function getRoutes() {
-    const resp = await fetch("http://localhost:8000/route/", {
+    const resp = await fetch("https://jyourney.herokuapp.com/route/", {
       headers: { Authorization: `Token ${localStorage.getItem("token")}` },
     });
     const data = await resp.json();
@@ -48,7 +48,7 @@ export function Account() {
     console.log(data);
   }
   async function getUser() {
-    const resp = await fetch("http://localhost:8000/auth/user", {
+    const resp = await fetch("https://jyourney.herokuapp.com/auth/user", {
       headers: { Authorization: `Token ${localStorage.getItem("token")}` },
     });
     const data = await resp.json();

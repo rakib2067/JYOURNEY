@@ -56,14 +56,17 @@ export function RouteCard(props) {
         };
 
         console.log(data);
-        let response = await fetch(`http://127.0.0.1:8000/feed/create`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify(data),
-        });
+        let response = await fetch(
+          `https://jyourney.herokuapp.com/feed/create`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Token ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(data),
+          }
+        );
         if (response.status == "201") {
           setShow(false);
           goTo("/feed");
@@ -77,7 +80,7 @@ export function RouteCard(props) {
   }
   async function handleChange() {
     let response = await fetch(
-      `http://127.0.0.1:8000/route/update/${props.route.id}`,
+      `https://jyourney.herokuapp.com/route/update/${props.route.id}`,
       {
         method: "PUT",
         headers: {
@@ -95,7 +98,7 @@ export function RouteCard(props) {
 
   async function handleDelete() {
     let response = await fetch(
-      `http://127.0.0.1:8000/route/delete/${props.route.id}`,
+      `https://jyourney.herokuapp.com/route/delete/${props.route.id}`,
       {
         method: "DELETE",
         headers: {

@@ -2,9 +2,9 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../../auth/auth";
 import { useNavigate } from "react-router-dom";
-import { Header } from "../../layout/header"
+import { Header } from "../../layout/header";
 
-import './index.css'
+import "./index.css";
 import Container from "react-bootstrap/Container";
 
 export function Login({ handleLogin }) {
@@ -23,7 +23,7 @@ export function Login({ handleLogin }) {
     e.preventDefault();
     console.log(email, password);
     axios
-      .post("http://127.0.0.1:8000/auth/login", {
+      .post("https://jyourney.herokuapp.com/auth/login", {
         username: email,
         password: password,
       })
@@ -37,10 +37,10 @@ export function Login({ handleLogin }) {
         console.log(error);
       });
   }
-  
-    return (
-      <>
-      <Header isNotAuth={true}/>
+
+  return (
+    <>
+      <Header isNotAuth={true} />
       <form onSubmit={handleSubmit} action="" className="Logform">
         <input
           type="email"
@@ -56,8 +56,8 @@ export function Login({ handleLogin }) {
           value={password}
           className="input"
         />
-        <input type="submit" value="Login" className="Loginput"/>
+        <input type="submit" value="Login" className="Loginput" />
       </form>
-      </>
+    </>
   );
 }

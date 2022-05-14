@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Header } from "../../layout/header"
+import { Header } from "../../layout/header";
 
-import './index.css'
+import "./index.css";
 import Container from "react-bootstrap/Container";
 
 export function Register({ handleLogin }) {
@@ -28,7 +28,7 @@ export function Register({ handleLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post("http://127.0.0.1:8000/auth/register", {
+      .post("https://jyourney.herokuapp.com/auth/register", {
         email: email,
         password: password,
         username: username,
@@ -48,35 +48,39 @@ export function Register({ handleLogin }) {
   return (
     <>
       <div>
-        <Header isNotAuth={true}/>
-         <form onSubmit={handleSubmit} action="" className="Regform">
-           <input
-             type="text"
-             onChange={onUsernameChange}
-             placeholder="Username..."
-             value={username}
-             className="input" />
-           <input
-             type="email"
-             onChange={onEmailChange}
-             placeholder="Email..."
-             value={email}
-             className="input" />
-           <input
-             type="password"
-             onChange={onPasswordChange}
-             placeholder="Password..."
-             value={password}
-             className="input" />
-           <input
-             type="password"
-             onChange={onConfirmedChange}
-             placeholder="Confirm Password..."
-             value={confirmed}
-             className="input" />
-           <input type="submit" value="Register" className="sbtinput" />
-         </form>
-         </div>
-      </>
-   );
- }
+        <Header isNotAuth={true} />
+        <form onSubmit={handleSubmit} action="" className="Regform">
+          <input
+            type="text"
+            onChange={onUsernameChange}
+            placeholder="Username..."
+            value={username}
+            className="input"
+          />
+          <input
+            type="email"
+            onChange={onEmailChange}
+            placeholder="Email..."
+            value={email}
+            className="input"
+          />
+          <input
+            type="password"
+            onChange={onPasswordChange}
+            placeholder="Password..."
+            value={password}
+            className="input"
+          />
+          <input
+            type="password"
+            onChange={onConfirmedChange}
+            placeholder="Confirm Password..."
+            value={confirmed}
+            className="input"
+          />
+          <input type="submit" value="Register" className="sbtinput" />
+        </form>
+      </div>
+    </>
+  );
+}
