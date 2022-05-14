@@ -52,6 +52,7 @@ export function Posts({}) {
         ...data,
         id: (Math.random() + 1).toString(36).substring(7),
         date_added: new Date().toISOString(),
+        poster_name: localStorage.getItem("username"),
       });
       setShow(false);
     }
