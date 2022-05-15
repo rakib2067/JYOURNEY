@@ -20,17 +20,18 @@ export const Home = () => {
     <>
       <Map />
       <div className="d-grid gap-2">
-        <h1>Your Journeys</h1>
-
-        <div className="btn-container">
-          <Button
-            variant="primary"
-            className="feed-btn"
-            onClick={() => goTo("/account")}
-            style={{ cursor: "pointer" }}
-          >
-            Journeys
-          </Button>
+        <div className="btnView">
+          <h1>Your Journeys</h1>
+          <div className="btn-container ">
+            <Button
+              variant="primary"
+              className="feed-btn"
+              onClick={() => goTo("/account")}
+              style={{ cursor: "pointer" }}
+            >
+              Journeys
+            </Button>
+          </div>
         </div>
       </div>
     </>

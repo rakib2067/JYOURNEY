@@ -4,7 +4,9 @@
      align-items: center;
      margin-top: 1.25rem;
  }
- 
+ .post{
+    width: 30%;
+ }
  .like-btn{
      color: rgb(250, 4, 4);
      font-size:x-large;
@@ -16,10 +18,7 @@
  }
 
 
- .postImg{
-    height: 200px;
-    object-fit: contain
- }
+ 
 
 
 .comment{
@@ -44,4 +43,58 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.postContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.card{
+    width: 80% !important;
+}
+.postImg{
+    object-fit: contain
+ }
+
+.btn{
+    margin-bottom: .35rem;
+}
+
+@media screen and (min-width:768px) {
+    .card{
+        width: 40% !important;
+    }
+    
+}
+
+@media screen and (min-width:1024px) {
+    .postContainer{
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        justify-content: center;
+     
+    }
+    .post{
+        width: 100% !important;
+        /* display:flex */
+    }
+    .card  {
+        flex-direction: row-reverse !important;
+    }
+    .post .card-body{
+        flex: 3;
+    }
+    .post img{
+        flex: 1;
+        object-fit: cover;
+        height: 350px;
+    }
+    
 }

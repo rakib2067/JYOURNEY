@@ -30,7 +30,7 @@ export function Map() {
   const [showToast, setShowToast] = useState(false);
 
   const [refresh, setRefresh] = useState(false);
-  
+
   // check if user has coordinates in the local storage
   useEffect(() => {
     if (localStorage.getItem("startLat") != null) {
@@ -119,9 +119,7 @@ export function Map() {
       distance: directions.routes[0].legs[0].distance.text,
       duration: directions.routes[0].legs[0].duration.text,
     };
-    console.log(directions);
-    console.log(JSON.stringify(data));
-    let response = await fetch("http://127.0.0.1:8000/route/create", {
+    let response = await fetch("https://jyourney.herokuapp.com/route/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -130,8 +128,6 @@ export function Map() {
       body: JSON.stringify(data),
     });
     if (response.ok) {
-      let json = await response.json();
-      console.log(json);
       setShowToast(true);
     } else {
       alert("Failed to add route");
@@ -139,7 +135,7 @@ export function Map() {
   }
 
   return (
-    <>
+    <div className="submitContainer">
       <div className="mapContainer">
         <div>
           <GoogleMap
@@ -282,7 +278,7 @@ export function Map() {
         {!starting}
         {directions && <Distance leg={directions.routes[0].legs[0]} />}
       </div>
-    </>
+    </div>
   );
 }
 

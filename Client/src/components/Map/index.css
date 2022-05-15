@@ -28,3 +28,13 @@
     margin: 0 auto;
     margin-top: 1rem;
 }
+
+
+@media screen and (min-width:1024px) {
+    
+    .submitContainer{
+        display: flex ;
+        flex-direction: row-reverse;
+        padding:1rem;
+    }
+}

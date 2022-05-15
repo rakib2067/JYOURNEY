@@ -6,14 +6,9 @@ import { Modal } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import OffcanvasHeader from "react-bootstrap/OffcanvasHeader";
-import OffcanvasTitle from "react-bootstrap/OffcanvasTitle";
-import OffcanvasBody from "react-bootstrap/OffcanvasBody";
 import { Badge } from "react-bootstrap";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-// import Heart from "react-animated-heart";
 
 export function Posts({}) {
   let [posts, setPosts] = useState();
@@ -38,7 +33,7 @@ export function Posts({}) {
       body: commentDescription,
       post: post.id,
     };
-    const resp = await fetch(`http://localhost:8000/feed/comment`, {
+    const resp = await fetch(`https://jyourney.herokuapp.com/feed/comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,15 +47,19 @@ export function Posts({}) {
         ...data,
         id: (Math.random() + 1).toString(36).substring(7),
         date_added: new Date().toISOString(),
+        poster_name: localStorage.getItem("username"),
       });
       setShow(false);
     }
   }
   async function deletePost(post) {
-    const resp = await fetch(`http://localhost:8000/feed/delete/${post.id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-    });
+    const resp = await fetch(
+      `https://jyourney.herokuapp.com/feed/delete/${post.id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      }
+    );
 
     if (resp.status == "200") {
       setPosts((prev) => prev.filter((p) => p.id !== post.id));
@@ -75,14 +74,17 @@ export function Posts({}) {
       post_url: post.post_url,
     };
     console.log(data);
-    const resp = await fetch(`http://127.0.0.1:8000/feed/like/${post.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    });
+    const resp = await fetch(
+      `https://jyourney.herokuapp.com/feed/like/${post.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
     console.log(resp);
     const respData = await resp.json();
 
@@ -123,7 +125,7 @@ export function Posts({}) {
     goTo("/");
   }
   async function getPosts() {
-    const resp = await fetch("http://localhost:8000/feed/", {
+    const resp = await fetch("https://jyourney.herokuapp.com/feed/", {
       headers: { Authorization: `Token ${localStorage.getItem("token")}` },
     });
     const data = await resp.json();
@@ -132,16 +134,14 @@ export function Posts({}) {
   }
 
   return (
-    <>
+    <div className="postContainer">
       {posts &&
         posts.map((post) => (
-          <section key={post.id} className="card-container">
-            <Card style={{ width: "18rem" }}>
-              <Card.Img className="postImg" variant="top" src={post.post_url} />
-              <Card.Body>
-                <Card.Title>{`Title: ${post.title}`}</Card.Title>
-                <Card.Text>{`Description: ${post.description}`}</Card.Text>
-              </Card.Body>
+          <Card key={post.id} className="post" style={{ width: "18rem" }}>
+            <Card.Img className="postImg" variant="top" src={post.post_url} />
+            <Card.Body>
+              <Card.Title>{`Title: ${post.title}`}</Card.Title>
+              <Card.Text>{`Description: ${post.description}`}</Card.Text>
               <ListGroup className="list-group-flush">
                 <ListGroupItem>{`Poster name: ${post.poster_name}`}</ListGroupItem>
                 <ListGroupItem>{`Route: ${post.route}`}</ListGroupItem>
@@ -176,10 +176,17 @@ export function Posts({}) {
                 </div>
                 <ListGroupItem>{`Post date: ${post.post_date}`}</ListGroupItem>
               </ListGroup>
-              <Card.Body />
-              <Button variant="warning" onClick={handleShow}>
-                Add Comments
-              </Button>
+              <div className="btnCont">
+                <Button variant="warning" onClick={handleShow}>
+                  Add Comments
+                </Button>
+                <Button variant="primary" onClick={handleViewCanvas}>
+                  View Comments
+                </Button>
+                <Button variant="info" onClick={() => goToRoute(post)}>
+                  Go To Route
+                </Button>
+              </div>
               <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>Comment Entry</Modal.Title>
@@ -217,40 +224,33 @@ export function Posts({}) {
                   </Button>
                 </Modal.Footer>
               </Modal>
-              <Button variant="primary" onClick={handleViewCanvas}>
-                View Comments
-              </Button>
-              <Button variant="info" onClick={() => goToRoute(post)}>
-                Go To Route
-              </Button>
+            </Card.Body>
 
-              <Offcanvas show={viewCanvas} onHide={handleCommentClose}>
-                <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>All comments for this post:</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                  {post.comments.map((comment) => {
-                    console.log(comment);
-                    return (
-                      <div key={comment.id} className="comment">
-                        <p className="commentTitle">{comment.poster_name}</p>
-                        <p>{comment.body}</p>
-                        <p className="commentDate">
-                          Posted At:{" "}
-                          {comment.date_added.substring(
-                            0,
-                            comment.date_added.indexOf("T")
-                          )}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </Offcanvas.Body>
-              </Offcanvas>
-              <Card.Body />
-            </Card>
-          </section>
+            <Offcanvas show={viewCanvas} onHide={handleCommentClose}>
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title>All comments for this post:</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                {post.comments.map((comment) => {
+                  console.log(comment);
+                  return (
+                    <div key={comment.id} className="comment">
+                      <p className="commentTitle">{comment.poster_name}</p>
+                      <p>{comment.body}</p>
+                      <p className="commentDate">
+                        Posted At:{" "}
+                        {comment.date_added.substring(
+                          0,
+                          comment.date_added.indexOf("T")
+                        )}
+                      </p>
+                    </div>
+                  );
+                })}
+              </Offcanvas.Body>
+            </Offcanvas>
+          </Card>
         ))}
-    </>
+    </div>
   );
 }
