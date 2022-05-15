@@ -12,6 +12,7 @@ export function Login({ handleLogin }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState();
 
   const { user, setUser } = useContext(AuthContext);
   const goTo = useNavigate();
@@ -39,6 +40,8 @@ export function Login({ handleLogin }) {
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
+        setErrors(error.status.non_field_errors[0]);
       });
   }
 
@@ -61,7 +64,8 @@ export function Login({ handleLogin }) {
             value={password}
             className="input"
           />
-          <button type="submit" className="Loginput">
+          {errors && <p className="errorText">{errors}</p>}
+          <button type="submit" disabled={loading} className="Loginput">
             {loading && <Spinner animation="border" />}
             {!loading && <span>Login</span>}
           </button>

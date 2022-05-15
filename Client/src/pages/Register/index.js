@@ -97,7 +97,7 @@ export function Register({ handleLogin }) {
           {errors && errors.confirmed_password && (
             <p className="errorText"> {errors.confirmed_password}</p>
           )}
-          <button type="submit" className="sbtinput">
+          <button type="submit" disabled={loading} className="sbtinput">
             {loading && <Spinner animation="border" />}
             {!loading && <span>Register</span>}
           </button>
