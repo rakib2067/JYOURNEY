@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Header } from "../../layout/header";
 import "./index.css";
-import Container from "react-bootstrap/Container";
 import { Spinner } from "react-bootstrap";
 
 export function Register({ handleLogin }) {
@@ -12,6 +11,7 @@ export function Register({ handleLogin }) {
   const [username, setUsername] = useState();
   const [confirmed, setConfirmed] = useState();
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState();
 
   const goTo = useNavigate();
   const onEmailChange = (e) => {
@@ -47,6 +47,8 @@ export function Register({ handleLogin }) {
       .catch((error) => {
         console.log(error);
         console.log(error.response.data);
+        setErrors(error.response.data);
+        setLoading(false);
       });
   }
 
@@ -62,6 +64,9 @@ export function Register({ handleLogin }) {
             value={username}
             className="input"
           />
+          {errors && errors.username && (
+            <p className="errorText"> {errors.username}</p>
+          )}
           <input
             type="email"
             onChange={onEmailChange}
@@ -69,6 +74,9 @@ export function Register({ handleLogin }) {
             value={email}
             className="input"
           />
+          {errors && errors.email && (
+            <p className="errorText"> {errors.email}</p>
+          )}
           <input
             type="password"
             onChange={onPasswordChange}
@@ -76,6 +84,9 @@ export function Register({ handleLogin }) {
             value={password}
             className="input"
           />
+          {errors && errors.password && (
+            <p className="errorText"> {errors.password}</p>
+          )}
           <input
             type="password"
             onChange={onConfirmedChange}
@@ -83,6 +94,9 @@ export function Register({ handleLogin }) {
             value={confirmed}
             className="input"
           />
+          {errors && errors.confirmed_password && (
+            <p className="errorText"> {errors.confirmed_password}</p>
+          )}
           <button type="submit" className="sbtinput">
             {loading && <Spinner animation="border" />}
             {!loading && <span>Register</span>}
