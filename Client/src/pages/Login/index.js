@@ -6,10 +6,12 @@ import { Header } from "../../layout/header";
 
 import "./index.css";
 import Container from "react-bootstrap/Container";
+import { Spinner } from "react-bootstrap";
 
 export function Login({ handleLogin }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [loading, setLoading] = useState(false);
 
   const { user, setUser } = useContext(AuthContext);
   const goTo = useNavigate();
@@ -22,6 +24,7 @@ export function Login({ handleLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(email, password);
+    setLoading(true);
     axios
       .post("https://jyourney.herokuapp.com/auth/login", {
         username: email,
@@ -30,6 +33,7 @@ export function Login({ handleLogin }) {
       .then((resp) => {
         console.log(resp);
         localStorage.setItem("token", resp.data.token);
+        setLoading(false);
         handleLogin();
         goTo("/");
       })
@@ -57,7 +61,10 @@ export function Login({ handleLogin }) {
             value={password}
             className="input"
           />
-          <input type="submit" value="Login" className="Loginput" />
+          <button type="submit" className="Loginput">
+            {loading && <Spinner animation="border" />}
+            {!loading && <span>Login</span>}
+          </button>
         </form>
       </div>
     </>

@@ -2,15 +2,16 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Header } from "../../layout/header";
-
 import "./index.css";
 import Container from "react-bootstrap/Container";
+import { Spinner } from "react-bootstrap";
 
 export function Register({ handleLogin }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [username, setUsername] = useState();
   const [confirmed, setConfirmed] = useState();
+  const [loading, setLoading] = useState(false);
 
   const goTo = useNavigate();
   const onEmailChange = (e) => {
@@ -27,6 +28,8 @@ export function Register({ handleLogin }) {
   };
   function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
+
     axios
       .post("https://jyourney.herokuapp.com/auth/register", {
         email: email,
@@ -36,12 +39,14 @@ export function Register({ handleLogin }) {
       })
       .then((resp) => {
         console.log(resp);
+        setLoading(false);
         localStorage.setItem("token", resp.data.token);
         handleLogin();
         goTo("/");
       })
       .catch((error) => {
         console.log(error);
+        console.log(error.response.data);
       });
   }
 
@@ -78,7 +83,10 @@ export function Register({ handleLogin }) {
             value={confirmed}
             className="input"
           />
-          <input type="submit" value="Register" className="sbtinput" />
+          <button type="submit" className="sbtinput">
+            {loading && <Spinner animation="border" />}
+            {!loading && <span>Register</span>}
+          </button>
         </form>
       </div>
     </>
