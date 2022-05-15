@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../auth/auth";
@@ -6,12 +6,15 @@ import AuthContext from "../../auth/auth";
 import "./index.css";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
+import { Spinner } from "react-bootstrap";
 
 export function Header({ isNotAuth }) {
   const nav = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const auth = useContext(AuthContext);
   function handleLogOut() {
+    setLoading(true);
     axios
       .get("https://jyourney.herokuapp.com/auth/logout", {
         headers: {
@@ -23,9 +26,11 @@ export function Header({ isNotAuth }) {
         localStorage.removeItem("token");
         localStorage.removeItem("url");
         auth.setIsLoggedIn(false);
+        setLoading(false);
         nav("/");
       })
       .catch((err) => {
+        setLoading(false);
         alert("Logout Unsuccesful", err);
       });
   }
@@ -60,6 +65,7 @@ export function Header({ isNotAuth }) {
               onClick={handleLogOut}
               variant="info"
             >
+              {loading && <Spinner animation="border" />}
               Log Out
             </Button>{" "}
           </>
