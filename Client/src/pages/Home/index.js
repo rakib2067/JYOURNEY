@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export const Home = () => {
   const goTo = useNavigate();
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBo05dfuypv2g57ktjFAyPAYGe-5Nv4h_0",
+    googleMapsApiKey: process.env.GOOGLE_MAPS_KEY,
     libraries: ["places"],
   });
 
