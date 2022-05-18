@@ -41,7 +41,7 @@ export function Login({ handleLogin }) {
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setErrors(error.response.data);
+        setErrors(error.response.data.non_field_errors[0]);
       });
   }
 
