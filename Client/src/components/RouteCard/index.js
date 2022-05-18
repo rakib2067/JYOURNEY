@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Card } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 import { Form } from "react-bootstrap";
@@ -12,6 +12,7 @@ import "./index.css";
 
 export function RouteCard(props) {
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [postTitle, setPostTitle] = useState();
   const [postDesc, setPostDesc] = useState();
@@ -35,6 +36,7 @@ export function RouteCard(props) {
     if (image == null) {
       return alert("Error uploading");
     }
+    setLoading(true);
     let imageUrl;
     const postsRef = ref(
       storage,
@@ -69,6 +71,7 @@ export function RouteCard(props) {
         );
         if (response.status == "201") {
           setShow(false);
+          setLoading(false);
           goTo("/feed");
         } else {
           alert("Error creating post!");
@@ -184,7 +187,8 @@ export function RouteCard(props) {
                   Close
                 </Button>
                 <Button variant="primary" onClick={handleClose}>
-                  Create Post
+                  {loading && <Spinner animation="border" />}
+                  {!loading && <span>Create Post</span>}
                 </Button>
               </Modal.Footer>
             </Modal>

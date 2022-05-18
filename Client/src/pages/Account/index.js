@@ -3,12 +3,15 @@ import React, { useEffect, useState } from "react";
 import { RouteCard } from "../../components";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-import "./index.css";
 import avatar from "../../img/avatar.jpg";
+import { Spinner } from "react-bootstrap";
+import "./index.css";
+
 export function Account() {
   const [routes, setRoutes] = useState();
   const [user, setUser] = useState();
   const [url, setUrl] = useState(avatar);
+  const [loading, setLoading] = useState(false);
 
   const [image, setImage] = useState();
   const storage = getStorage();
@@ -17,6 +20,7 @@ export function Account() {
     if (image == null) {
       return alert("Error uploading");
     }
+    setLoading(true);
     const reader = new FileReader();
     const profileRef = ref(storage, `Profiles/${user.id}`);
     uploadBytes(profileRef, image)
@@ -26,6 +30,7 @@ export function Account() {
       .then((downloadUrl) => {
         reader.onload = () => {
           if (reader.readyState == 2) {
+            setLoading(false);
             setUrl(reader.result);
           }
         };
@@ -96,7 +101,8 @@ export function Account() {
             }}
           />
           <button className="avatar-btn" onClick={uploadImage}>
-            Upload
+            {loading && <Spinner animation="border" />}
+            {!loading && <span>Upload</span>}
           </button>
         </div>
       </section>
