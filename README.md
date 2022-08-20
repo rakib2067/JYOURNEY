@@ -48,8 +48,3 @@ Made using React, Django rest framework and google maps API
 - Mark routes as completed
 - Create Blog Post on Route
 - Comment on Posts
--------
-
-
-
-# License
