@@ -7,7 +7,6 @@ A full-stack web application where users can create an account, search for a cyc
 Made using React, Django rest framework and google maps API
 
 
--------
 
 # Installation & Usage
 
@@ -22,13 +21,12 @@ Made using React, Django rest framework and google maps API
 - run `pip install -r requirements.txt`
 - run `python manage.py runserver`
 
--------
 
 # Process & Planning
 
 * Used GitHub's kanban board to define and track our [mains tasks](https://github.com/rakib2067/JYOURNEY/projects/1), as well as our [backend workflow](https://github.com/rakib2067/JYOURNEY/projects/3) and [frontend requirements](https://github.com/rakib2067/JYOURNEY/projects/2).
 
--------
+
 
 # Technologies
 
@@ -37,7 +35,6 @@ Made using React, Django rest framework and google maps API
 - PostgreSQL
 - Firebase
 
--------
 
 # Functionalities
 
