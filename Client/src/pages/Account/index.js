@@ -45,17 +45,23 @@ export function Account() {
   }, []);
   // test
   async function getRoutes() {
-    const resp = await fetch("https://jyourney.herokuapp.com/route/", {
-      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-    });
+    const resp = await fetch(
+      "https://jyourney-production.up.railway.app/route/",
+      {
+        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      }
+    );
     const data = await resp.json();
     setRoutes(data);
     console.log(data);
   }
   async function getUser() {
-    const resp = await fetch("https://jyourney.herokuapp.com/auth/user", {
-      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-    });
+    const resp = await fetch(
+      "https://jyourney-production.up.railway.app/auth/user",
+      {
+        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      }
+    );
     const data = await resp.json();
     getDownloadURL(ref(storage, `Profiles/${data.id}`))
       .then((url) => {

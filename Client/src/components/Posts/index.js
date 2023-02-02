@@ -33,14 +33,17 @@ export function Posts({}) {
       body: commentDescription,
       post: post.id,
     };
-    const resp = await fetch(`https://jyourney.herokuapp.com/feed/comment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    });
+    const resp = await fetch(
+      `https://jyourney-production.up.railway.app/feed/comment`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
 
     if (resp.status == "201") {
       post.comments.push({
@@ -54,7 +57,7 @@ export function Posts({}) {
   }
   async function deletePost(post) {
     const resp = await fetch(
-      `https://jyourney.herokuapp.com/feed/delete/${post.id}`,
+      `https://jyourney-production.up.railway.app/feed/delete/${post.id}`,
       {
         method: "DELETE",
         headers: { Authorization: `Token ${localStorage.getItem("token")}` },
@@ -75,7 +78,7 @@ export function Posts({}) {
     };
     console.log(data);
     const resp = await fetch(
-      `https://jyourney.herokuapp.com/feed/like/${post.id}`,
+      `https://jyourney-production.up.railway.app/feed/like/${post.id}`,
       {
         method: "PUT",
         headers: {
@@ -125,9 +128,12 @@ export function Posts({}) {
     goTo("/");
   }
   async function getPosts() {
-    const resp = await fetch("https://jyourney.herokuapp.com/feed/", {
-      headers: { Authorization: `Token ${localStorage.getItem("token")}` },
-    });
+    const resp = await fetch(
+      "https://jyourney-production.up.railway.app/feed/",
+      {
+        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      }
+    );
     const data = await resp.json();
 
     setPosts(data);

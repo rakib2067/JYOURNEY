@@ -27,7 +27,7 @@ export function Login({ handleLogin }) {
     console.log(email, password);
     setLoading(true);
     axios
-      .post("https://jyourney.herokuapp.com/auth/login", {
+      .post("https://jyourney-production.up.railway.app/auth/login", {
         username: email,
         password: password,
       })

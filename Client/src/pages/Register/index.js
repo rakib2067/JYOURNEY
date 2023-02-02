@@ -31,7 +31,7 @@ export function Register({ handleLogin }) {
     setLoading(true);
 
     axios
-      .post("https://jyourney.herokuapp.com/auth/register", {
+      .post("https://jyourney-production.up.railway.app/auth/register", {
         email: email,
         password: password,
         username: username,

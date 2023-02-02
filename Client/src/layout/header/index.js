@@ -16,7 +16,7 @@ export function Header({ isNotAuth }) {
   function handleLogOut() {
     setLoading(true);
     axios
-      .get("https://jyourney.herokuapp.com/auth/logout", {
+      .get("https://jyourney-production.up.railway.app/auth/logout", {
         headers: {
           Authorization: `Token ${localStorage.getItem("token")}`,
         },

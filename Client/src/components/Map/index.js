@@ -119,14 +119,17 @@ export function Map() {
       distance: directions.routes[0].legs[0].distance.text,
       duration: directions.routes[0].legs[0].duration.text,
     };
-    let response = await fetch("https://jyourney.herokuapp.com/route/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    });
+    let response = await fetch(
+      "https://jyourney-production.up.railway.app/route/create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
     if (response.ok) {
       setShowToast(true);
     } else {

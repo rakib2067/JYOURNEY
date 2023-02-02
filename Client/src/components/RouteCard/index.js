@@ -59,7 +59,7 @@ export function RouteCard(props) {
 
         console.log(data);
         let response = await fetch(
-          `https://jyourney.herokuapp.com/feed/create`,
+          `https://jyourney-production.up.railway.app/feed/create`,
           {
             method: "POST",
             headers: {
@@ -83,7 +83,7 @@ export function RouteCard(props) {
   }
   async function handleChange() {
     let response = await fetch(
-      `https://jyourney.herokuapp.com/route/update/${props.route.id}`,
+      `https://jyourney-production.up.railway.app/route/update/${props.route.id}`,
       {
         method: "PUT",
         headers: {
@@ -101,7 +101,7 @@ export function RouteCard(props) {
 
   async function handleDelete() {
     let response = await fetch(
-      `https://jyourney.herokuapp.com/route/delete/${props.route.id}`,
+      `https://jyourney-production.up.railway.app/route/delete/${props.route.id}`,
       {
         method: "DELETE",
         headers: {
